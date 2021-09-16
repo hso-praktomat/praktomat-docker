@@ -51,7 +51,7 @@ EMAIL_PORT = 25
 
 DEFAULT_FROM_EMAIL = "praktomat@ipd.info.uni-karlsruhe.de"
 
-DEBUG = True
+DEBUG = False
 
 DATABASES = {
     'default': {

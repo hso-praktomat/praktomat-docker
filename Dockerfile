@@ -22,4 +22,4 @@ ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12
 ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-5.8/checkstyle-5.8-all.jar /srv/praktomat/contrib/checkstyle.jar
 RUN sudo /etc/init.d/postgresql start && mkdir PraktomatSupport && python3 Praktomat/src/manage-local.py collectstatic --noinput --link && python3 Praktomat/src/manage-local.py migrate --noinput
 
-ENTRYPOINT sudo /etc/init.d/postgresql start && python3 Praktomat/src/manage-local.py runserver 0.0.0.0:8000
+ENTRYPOINT sudo /etc/init.d/postgresql start && python3 Praktomat/src/manage-local.py runserver --insecure 0.0.0.0:8000
