@@ -34,7 +34,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 2000
 # Absolute path to the directory that shall hold all uploaded files as well as
 # files created at runtime.
 
-UPLOAD_ROOT = "/PraktomatSupport/"
+UPLOAD_ROOT = join(PRAKTOMAT_PATH, "../PraktomatSupport/")
 
 SANDBOX_DIR = '/srv/praktomat/sandbox/'
 

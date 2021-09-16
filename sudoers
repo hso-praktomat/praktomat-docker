@@ -1,0 +1,5 @@
+root        ALL=(ALL) ALL
+%sudo       ALL=(ALL) NOPASSWD: ALL
+Defaults    env_reset
+
+#includedir /etc/sudoers.d
