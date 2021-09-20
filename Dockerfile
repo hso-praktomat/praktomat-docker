@@ -6,6 +6,7 @@ RUN apt-get update
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -yq postgresql apache2 libpq-dev zlib1g-dev libmysqlclient-dev libsasl2-dev libssl-dev swig libapache2-mod-xsendfile libapache2-mod-wsgi-py3 openjdk-8-jdk junit junit4 dejagnu r-base git-core python3-setuptools python3-psycopg2 python3-virtualenv python3-pip sudo
 RUN useradd -m praktomat && adduser praktomat sudo
+RUN useradd -m tester && adduser tester sudo
 COPY sudoers /etc/sudoers
 RUN chmod 440 /etc/sudoers
 

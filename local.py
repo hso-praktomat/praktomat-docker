@@ -1,7 +1,6 @@
 # Settings for deployment
 
-from os.path import join, dirname, basename
-import re
+from os.path import join, dirname
 
 PRAKTOMAT_PATH = dirname(dirname(dirname(__file__)))
 PRAKTOMAT_ID = "aki-java"
@@ -71,10 +70,10 @@ REGISTRATION_POSSIBLE = False
 SYSADMIN_MOTD_URL = "about:blank"
 
 # Use a dedicated user to test submissions
-USEPRAKTOMATTESTER = False
+USEPRAKTOMATTESTER = True
 
 # Use docker to test submission
-USESAFEDOCKER = True
+USESAFEDOCKER = False
 
 # Various extra files and versions
 CHECKSTYLEALLJAR = '/srv/praktomat/contrib/checkstyle.jar'
