@@ -15,7 +15,7 @@ RUN /etc/init.d/postgresql start && createuser -DRS praktomat && createdb -O pra
 USER praktomat
 WORKDIR /home/praktomat
 RUN pip3 install --upgrade pip && pip3 install -U pip virtualenv setuptools wheel urllib3[secure]
-RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git
+RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git && cd Praktomat && git checkout 7642e068a6b5ff60039528bd1ef8804d2ad30ceb
 RUN pip3 install -r Praktomat/requirements.txt
 COPY local.py Praktomat/src/settings/local.py
 ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /srv/praktomat/contrib/jplag.jar
