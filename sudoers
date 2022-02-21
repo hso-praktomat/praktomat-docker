@@ -3,3 +3,7 @@ root        ALL=(ALL) ALL
 Defaults    env_reset
 
 #includedir /etc/sudoers.d
+
+_www		ALL=(tester) NOPASSWD: ALL
+developer	ALL=(tester) NOPASSWD: ALL
+praktomat 	ALL=(tester) NOPASSWD: ALL, NOPASSWD: /usr/local/bin/safe-docker
