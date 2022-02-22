@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  praktomat:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - workdata:/home/praktomat/work-data
+volumes:
+  workdata:
