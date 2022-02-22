@@ -15,8 +15,7 @@ RUN chmod 440 /etc/sudoers
 
 USER praktomat
 WORKDIR /home/praktomat
-RUN git clone --recursive git://github.com/ifrh/Praktomat.git && cd Praktomat && git checkout eec5679a3c7de32f35b052a9acd23dce975f0615
-# TODO change back to KITPraktomatTeam once the PR is merged
+RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git && cd Praktomat && git checkout 0279d68967eb32b4716240eb8844abba4ec8ecfa
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
