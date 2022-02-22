@@ -98,7 +98,8 @@ DATABASES = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME':   'praktomat_'+PRAKTOMAT_ID,
             'USER':   'praktomat',
-            'PASSWORD':   '',
+            'PASSWORD':   'praktomat_password',
+            'HOST':   'postgresql',
     }
 }
 

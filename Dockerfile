@@ -5,17 +5,13 @@ EXPOSE 8000/tcp
 # Install system requirements
 RUN apt-get update
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -yq postgresql apache2 apache2-dev libpq-dev zlib1g-dev libmysqlclient-dev libsasl2-dev libssl-dev libffi-dev swig libapache2-mod-xsendfile libapache2-mod-wsgi-py3 openjdk-8-jdk junit junit4 dejagnu r-base git-core python3-setuptools python3-psycopg2 python3-virtualenv python3-pip sudo
+RUN apt-get install -yq apache2 apache2-dev libpq-dev zlib1g-dev libmysqlclient-dev libsasl2-dev libssl-dev libffi-dev swig libapache2-mod-xsendfile libapache2-mod-wsgi-py3 openjdk-8-jdk junit junit4 dejagnu r-base git-core python3-setuptools python3-psycopg2 python3-virtualenv python3-pip sudo
 
 # Add users
 RUN useradd -m praktomat && adduser praktomat sudo
 RUN useradd -m tester && adduser tester sudo && adduser tester praktomat
 COPY sudoers /etc/sudoers
 RUN chmod 440 /etc/sudoers
-
-# Initialize database
-USER postgres
-RUN /etc/init.d/postgresql start && createuser -DRS praktomat && createdb --encoding UTF8 -O praktomat praktomat_default && createdb --encoding UTF8 -O praktomat praktomat_hso
 
 USER praktomat
 WORKDIR /home/praktomat
@@ -25,6 +21,10 @@ RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/javac
+
+# Get wait-for-it.sh (used to wait for PostgreSQL to become available)
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh wait-for-it.sh
+RUN sudo chmod 775 wait-for-it.sh
 
 # Install Python requirements
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtualenv setuptools wheel urllib3[secure]
@@ -50,4 +50,4 @@ RUN sudo chown praktomat:praktomat /srv/praktomat/sandbox
 # Initialize Praktomat
 RUN python3 Praktomat/src/manage-local.py collectstatic --noinput --link
 
-ENTRYPOINT sudo /etc/init.d/postgresql start && python3 Praktomat/src/manage-local.py migrate --noinput && python3 Praktomat/src/manage-local.py runserver --insecure 0.0.0.0:8000
+ENTRYPOINT ./wait-for-it.sh postgresql:5432 -- python3 Praktomat/src/manage-local.py migrate --noinput && python3 Praktomat/src/manage-local.py runserver --insecure 0.0.0.0:8000
