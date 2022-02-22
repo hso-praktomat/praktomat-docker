@@ -44,8 +44,6 @@ RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_w
 RUN mkdir debug-data
 RUN mkdir work-data
 RUN mkdir test-data
-RUN sudo mkdir -p /srv/praktomat/sandbox
-RUN sudo chown praktomat:praktomat /srv/praktomat/sandbox
 
 # Initialize Praktomat
 RUN python3 Praktomat/src/manage-local.py collectstatic --noinput --link
