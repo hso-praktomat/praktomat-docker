@@ -34,17 +34,23 @@ ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12
 ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/checkstyle-8.14-all.jar /opt/praktomat-addons/checkstyle-8.14-all.jar
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
 
-# Copy config files
+# Copy config file
 COPY local.py Praktomat/src/settings/local.py
-COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
-RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\nUse Praktomat hso /home/praktomat/\n" | sudo tee -a /etc/apache2/apache2.conf && sudo a2enmod macro
 
 # Setup required directories
 RUN mkdir debug-data
 RUN mkdir work-data
 RUN mkdir test-data
 
+# Configure Apache2
+RUN sudo a2enmod macro
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
+COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
+RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
+
 # Initialize Praktomat
 RUN python3 Praktomat/src/manage-local.py collectstatic --noinput --link
 
-ENTRYPOINT ./wait-for-it.sh postgresql:5432 -- python3 Praktomat/src/manage-local.py migrate --noinput && python3 Praktomat/src/manage-local.py runserver --insecure 0.0.0.0:8000
+ENTRYPOINT ./wait-for-it.sh postgresql:5432 -- python3 Praktomat/src/manage-local.py migrate --noinput && sudo apache2ctl -DFOREGROUND
