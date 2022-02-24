@@ -3,9 +3,31 @@ FROM ubuntu:bionic
 EXPOSE 8000/tcp
 
 # Install system requirements
-RUN apt-get update
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -yq apache2 apache2-dev libpq-dev zlib1g-dev libmysqlclient-dev libsasl2-dev libssl-dev libffi-dev swig libapache2-mod-xsendfile libapache2-mod-wsgi-py3 openjdk-8-jdk junit junit4 dejagnu r-base git-core python3-setuptools python3-psycopg2 python3-virtualenv python3-pip sudo
+RUN apt-get update && apt-get install -yq \
+  apache2 \
+  apache2-dev \
+  libpq-dev \
+  zlib1g-dev \
+  libmysqlclient-dev \
+  libsasl2-dev \
+  libssl-dev \
+  libffi-dev \
+  swig \
+  libapache2-mod-xsendfile \
+  libapache2-mod-wsgi-py3 \
+  openjdk-17-jdk \
+  junit \
+  junit4 \
+  dejagnu \
+  r-base \
+  git-core \
+  python3-setuptools \
+  python3-psycopg2 \
+  python3-virtualenv \
+  python3-pip \
+  sudo \
+  && rm -rf /var/lib/apt/lists/*
 
 # Add users
 RUN useradd -m praktomat && adduser praktomat sudo
