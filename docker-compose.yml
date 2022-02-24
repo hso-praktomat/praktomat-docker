@@ -7,7 +7,7 @@ services:
     volumes:
       - workdata:/home/praktomat/work-data
     depends_on:
-      - database
+      - postgresql
   postgresql:
     build: postgresql
     environment:
