@@ -8,16 +8,16 @@ import re
 
 PRAKTOMAT_PATH = dirname(dirname(dirname(__file__)))
 
-PRAKTOMAT_ID = "hso"
+PRAKTOMAT_ID = "${id}"
 
-SITE_NAME = "Programmierung mit Java (Wintersemester 2021/2022)"
+SITE_NAME = "${site_name}"
 MIRROR = False
 
 USING_ISABELLE = False
 
 # The URL where this site is reachable. 'http://localhost:443/' in case of the
 # development server.
-BASE_HOST = 'http://localhost:443'
+BASE_HOST = 'http://${domain}:443'
 BASE_PATH = '/'
 
 ALLOWED_HOSTS = [ '*', ]
@@ -67,7 +67,7 @@ UPLOAD_ROOT = join(dirname(PRAKTOMAT_PATH), "work-data/")
 #    SANDBOX_DIR = join('/srv/praktomat/sandbox/', PRAKTOMAT_ID)
 
 ADMINS = [
-  ('Hannes Braun', 'hannes.braun@hs-offenburg.de')
+  ('Praktomat Administrator', '${server_admin}')
 ]
 
 SERVER_EMAIL = 'praktomat@i44vm3.info.uni-karlsruhe.de'

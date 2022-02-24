@@ -1,15 +1,24 @@
 version: "3.9"
 services:
   praktomat:
-    build: praktomat
     ports:
       - 443:443
+    build:
+      context: praktomat
+      args:
+        ID: ${COMPOSE_PROJECT_NAME}
+        NAME: ${SITE_NAME}
+        ADMIN: ${SERVER_ADMIN}
+        DOMAIN: ${DOMAIN}
     volumes:
       - workdata:/home/praktomat/work-data
     depends_on:
       - postgresql
   postgresql:
-    build: postgresql
+    build: 
+      context: postgresql
+      args:
+        ID: ${COMPOSE_PROJECT_NAME}
     environment:
       POSTGRES_PASSWORD: superuser_password
 volumes:

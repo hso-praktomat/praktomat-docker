@@ -61,7 +61,16 @@ ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/c
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
 
 # Copy config file
+ARG ID
+ARG NAME
+ARG DOMAIN
+ARG ADMIN
 COPY local.py Praktomat/src/settings/local.py
+RUN sed -i -e "s/\${id}/$ID/" \
+  -e "s/\${site_name}/$NAME/" \
+  -e "s/\${domain}/$DOMAIN/" \
+  -e "s/\${server_admin}/$ADMIN/" \
+  Praktomat/src/settings/local.py
 
 # Setup required directories
 RUN mkdir debug-data
@@ -75,6 +84,10 @@ RUN sudo adduser www-data praktomat
 RUN sudo a2enmod macro
 COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
 COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
+RUN sed -i -e "s/\${id}/$ID/" \
+  -e "s/\${domain}/$DOMAIN/" \
+  -e "s/\${server_admin}/$ADMIN/" \
+  Praktomat/documentation/apache_praktomat_wsgi.conf
 RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
 
 # Initialize Praktomat
