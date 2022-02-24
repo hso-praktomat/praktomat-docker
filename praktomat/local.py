@@ -18,7 +18,7 @@ USING_ISABELLE = False
 # The URL where this site is reachable. 'http://localhost:443/' in case of the
 # development server.
 BASE_HOST = 'http://${domain}:443'
-BASE_PATH = '/'
+BASE_PATH = '/' + PRAKTOMAT_ID + '/'
 
 ALLOWED_HOSTS = [ '*', ]
 
