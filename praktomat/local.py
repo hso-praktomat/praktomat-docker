@@ -15,9 +15,9 @@ MIRROR = False
 
 USING_ISABELLE = False
 
-# The URL where this site is reachable. 'http://localhost:8000/' in case of the
+# The URL where this site is reachable. 'http://localhost:443/' in case of the
 # development server.
-BASE_HOST = 'http://localhost:8000'
+BASE_HOST = 'http://localhost:443'
 BASE_PATH = '/'
 
 ALLOWED_HOSTS = [ '*', ]

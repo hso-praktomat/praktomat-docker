@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:bionic
-EXPOSE 8000/tcp
+EXPOSE 443/tcp
 
 # Install system requirements
 ARG DEBIAN_FRONTEND=noninteractive

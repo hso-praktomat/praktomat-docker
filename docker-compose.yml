@@ -3,7 +3,7 @@ services:
   praktomat:
     build: praktomat
     ports:
-      - 8000:8000
+      - 443:443
     volumes:
       - workdata:/home/praktomat/work-data
     depends_on:
