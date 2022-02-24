@@ -51,6 +51,10 @@ RUN sudo chmod 775 wait-for-it.sh
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtualenv setuptools wheel urllib3[secure]
 RUN python3 -m pip install -r Praktomat/requirements.txt
 
+# Set executable/search flag for directories (only) located inside of /home/praktomat/.local
+# This is required for Apache in order to follow the symlinks to some files (referenced from static directory)
+RUN chmod -R g+X .local
+
 # Install Praktomat addons
 ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /opt/praktomat-addons/jplag.jar
 ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/checkstyle-8.14-all.jar /opt/praktomat-addons/checkstyle-8.14-all.jar
@@ -65,9 +69,10 @@ RUN mkdir work-data
 RUN mkdir test-data
 
 # Configure Apache2
-RUN sudo a2enmod macro
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
+RUN sudo adduser www-data praktomat
+RUN sudo a2enmod macro
 COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
 COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
 RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
