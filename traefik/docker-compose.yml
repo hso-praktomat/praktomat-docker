@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  traefik:
+    image: traefik:v2.6
+    ports:
+      - 443:443
+    networks:
+      - praktomat
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - type: bind
+        source: $PWD/traefik.toml
+        target: /traefik.toml
+networks:
+  praktomat:
+    external: true

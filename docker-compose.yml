@@ -1,8 +1,6 @@
 version: "3.9"
 services:
   praktomat:
-    ports:
-      - 443:443
     build:
       context: praktomat
       args:
@@ -14,6 +12,13 @@ services:
       - workdata:/home/praktomat/work-data
     depends_on:
       - postgresql
+    networks:
+      - database
+      - praktomat
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.rule=PathPrefix(`/${COMPOSE_PROJECT_NAME}`)
+      - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
   postgresql:
     build: 
       context: postgresql
@@ -21,5 +26,12 @@ services:
         ID: ${COMPOSE_PROJECT_NAME}
     environment:
       POSTGRES_PASSWORD: superuser_password
+    networks:
+      - database
 volumes:
   workdata:
+networks:
+  database:
+    name: ${COMPOSE_PROJECT_NAME}
+  praktomat:
+    external: true

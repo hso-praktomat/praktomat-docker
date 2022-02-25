@@ -1,0 +1,6 @@
+[entryPoints.websecure]
+address = ":443"
+
+[providers.docker]
+exposedByDefault = false
+network = "praktomat"
