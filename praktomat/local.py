@@ -122,12 +122,19 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SHIB_ENABLED = False
 
 # Set this to False to disable registration via the website, e.g. when Single Sign On is used
-REGISTRATION_POSSIBLE = True
+REGISTRATION_POSSIBLE = False
 
 
 # If you use shibboleth identitiy provider, please have a look into defaults.py
 # to see how to overwrite SHIB_ATTRIBUTE_MAP , SHIB_USERNAME , SHIB_PROVIDER
 
+LDAP_ENABLED = True
+AUTHENTICATION_BACKENDS = (
+    "accounts.ldap_auth.LDAPBackend",
+	"django.contrib.auth.backends.ModelBackend",
+)
+LDAP_URI="ldaps://ldap1.rz.hs-offenburg.de ldaps://ldap2.rz.hs-offenburg.de" 
+LDAP_BASE="o=fho"
 
 
 
