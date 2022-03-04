@@ -138,7 +138,7 @@ LDAP_BASE="o=fho"
 
 
 
-SYSADMIN_MOTD_URL = "about:blank"
+SYSADMIN_MOTD_URL = None
 
 # Use a dedicated user to test submissions
 USEPRAKTOMATTESTER = True
