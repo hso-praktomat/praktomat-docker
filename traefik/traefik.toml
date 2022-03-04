@@ -1,6 +1,9 @@
 [entryPoints.websecure]
 address = ":443"
 
+[providers.file]
+filename = "traefik_dynamic.toml"
+
 [providers.docker]
 exposedByDefault = false
 network = "praktomat"

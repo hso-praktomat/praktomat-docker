@@ -19,6 +19,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.rule=PathPrefix(`/${COMPOSE_PROJECT_NAME}`)
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
+      - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.tls=true
   postgresql:
     build: 
       context: postgresql

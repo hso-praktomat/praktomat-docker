@@ -11,6 +11,15 @@ services:
       - type: bind
         source: $PWD/traefik.toml
         target: /traefik.toml
+      - type: bind
+        source: $PWD/traefik_dynamic.toml
+        target: /traefik_dynamic.toml
+      - type: bind
+        source: $PWD/cert.pem
+        target: /cert.pem
+      - type: bind
+        source: $PWD/key.pem
+        target: /key.pem
 networks:
   praktomat:
     external: true
