@@ -30,6 +30,14 @@ RUN apt-get update && apt-get install -yq \
   sudo \
   && rm -rf /var/lib/apt/lists/*
 
+# Install Gradle
+ADD https://services.gradle.org/distributions/gradle-7.4-bin.zip /gradle.zip
+RUN mkdir /opt/gradle
+RUN unzip -d /opt/gradle /gradle.zip
+RUN rm /gradle.zip
+RUN chmod -R 775 /opt/gradle/gradle-7.4/bin
+RUN ln -s /opt/gradle/gradle-7.4/bin/* /usr/local/bin
+
 # Add users
 RUN useradd -m praktomat && adduser praktomat sudo
 RUN useradd -m tester && adduser tester sudo && adduser tester praktomat
