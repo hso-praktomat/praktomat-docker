@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  tivoli-client:
+    build:
+      context: tivoli-image
+    volumes:
+      - type: bind
+        source: $PWD/dsm.opt
+        target: /opt/tivoli/tsm/client/ba/bin/dsm.opt
+      - type: bind
+        source: $PWD/dsm.sys
+        target: /opt/tivoli/tsm/client/ba/bin/dsm.sys
+      - /data:/data
