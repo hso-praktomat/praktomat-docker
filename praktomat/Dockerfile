@@ -2,6 +2,10 @@
 FROM ubuntu:bionic
 EXPOSE 443/tcp
 
+# Setup timezone
+ENV TZ Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Install system requirements
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -yq \
