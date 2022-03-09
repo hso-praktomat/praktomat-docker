@@ -3,6 +3,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
-RUN apt-get install -y wget
+RUN apt-get install -y wget vim
 COPY install-tivoli /tmp/install-tivoli
 RUN bash /tmp/install-tivoli

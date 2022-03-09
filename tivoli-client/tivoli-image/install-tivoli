@@ -7,3 +7,6 @@ cd bacli
 dpkg -i gskcrypt64_8.0-50.66.linux.x86_64.deb gskssl64_8.0-50.66.linux.x86_64.deb
 dpkg -i tivsm-api64.amd64.deb
 dpkg -i tivsm-ba.amd64.deb
+echo "/usr/local/ibm/gsk8_64/lib64" >> /etc/ld.so.conf.d/tsm.conf
+/sbin/ldconfig
+touch /dsmerror.log

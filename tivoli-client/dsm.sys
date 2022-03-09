@@ -1,7 +1,9 @@
 Servername  BK2
-  COMMMethod         TCPip
-  TCPPort            1500
-  TCPServeraddress   bk2.rz.fh-offenburg.de
+COMMMethod         TCPip
+TCPPort            1500
+TCPServeraddress   bk2.rz.fh-offenburg.de
+
+Nodename progcheck
 
 * client acceptor daemon  web client agent service port
 * diese Ports in (lokaler) Firewall freischalten
@@ -11,7 +13,7 @@ httpport 1581
 *dsmcad startet Web Client und Scheduler
 *Web Client bei Bedarf temporaer aktivieren
 *MANAGEDSERVICES WEBCLIENT SCHEDULE
-MANAGEDSERVICES SCHEDULE
+*MANAGEDSERVICES SCHEDULE
 
 *Notwenig fuer Web client
 passwordaccess generate
