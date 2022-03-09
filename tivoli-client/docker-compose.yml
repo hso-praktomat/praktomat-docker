@@ -10,4 +10,4 @@ services:
       - type: bind
         source: $PWD/dsm.sys
         target: /opt/tivoli/tsm/client/ba/bin/dsm.sys
-      - /data:/data
+      - /home/progcheck/data:/data
