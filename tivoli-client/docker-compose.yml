@@ -11,3 +11,4 @@ services:
         source: $PWD/dsm.sys
         target: /opt/tivoli/tsm/client/ba/bin/dsm.sys
       - /home/progcheck/data:/data
+      - /home/progcheck/tivoli-logs:/logs

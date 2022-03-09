@@ -25,6 +25,12 @@ compression yes
 txnbytelimit 1G
 resourceutilization 6
 
+ERRORLOGName    /logs/dsmerror.log
+ERRORLOGRETENTION       60
+SCHEDLOGName    /logs/dsmsched.log
+SCHEDLOGRETENTION       30
+SCHEDMODE       POLLING
+
 domain /data
 
 include.encrypt /.../*
