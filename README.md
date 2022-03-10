@@ -5,10 +5,10 @@
 ```bash
 docker network create praktomat
 
-SITE_NAME="Algorithmen und Datenstrukturen (WIN\/WINplus)" SERVER_ADMIN="hannes.braun@hs-offenburg.de" DOMAIN="progcheck.emi.hs-offenburg.de" COMPOSE_PROJECT_NAME=algdat-win docker compose up -d
+SITE_NAME="Algorithmen und Datenstrukturen (WIN\/WINplus)" SERVER_ADMIN="hannes.braun@hs-offenburg.de" DOMAIN="progcheck.emi.hs-offenburg.de" COMPOSE_PROJECT_NAME=algdat-win docker-compose up -d
 
 cd traefik
-docker compose up -d
+docker-compose up -d
 ```
 
 ## Initial setup
@@ -25,7 +25,7 @@ Copy over the SSL/TLS certificate to `traefik/cert.pem` and the private key to `
 Now, start up the Traefik container.
 ```bash
 cd traefik
-docker compose up -d
+docker-compose up -d
 ```
 
 Aside from the labels of other Docker containers, Traefik is configured through a static configuration file `traefik.toml` as well as a dynamic configuration file `traefik_dynamic.toml`. See the [Traefik docs](https://doc.traefik.io/traefik/) for more information.
@@ -44,7 +44,7 @@ Since especially `SERVER_ADMIN` and `DOMAIN` won't change in most cases for diff
 Then start an instance with the following command. "Real" environment variables will override those specified in the `.env` file.
 
 ```bash
-SITE_NAME="Algorithmen und Datenstrukturen (WIN\/WINplus)" COMPOSE_PROJECT_NAME=algdat-win docker compose up -d
+SITE_NAME="Algorithmen und Datenstrukturen (WIN\/WINplus)" COMPOSE_PROJECT_NAME=algdat-win docker-compose up -d
 ```
 
 Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application. The submissions will be stored on a separate volume.
@@ -66,5 +66,5 @@ The application is accessible on https://DOMAIN/COMPOSE_PROJECT_NAME.
 If you want to stop or remove the instance, it is now sufficient to only supply the project name (Praktomat ID).
 
 ```bash
-COMPOSE_PROJECT_NAME=algdat-win docker compose stop
+COMPOSE_PROJECT_NAME=algdat-win docker-compose stop
 ```
