@@ -50,8 +50,8 @@ RUN chmod 440 /etc/sudoers
 
 USER praktomat
 WORKDIR /home/praktomat
-RUN git clone --recursive git://github.com/KITPraktomatTeam/Praktomat.git
-RUN cd Praktomat && git checkout aafbeb16c8200c48c0e89074bf22b162ab329d96
+RUN git clone --recursive git://github.com/hannesbraun/Praktomat.git
+RUN cd Praktomat && git checkout cda732c906426a4cadb5583f3385c5f3c767aee1
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
