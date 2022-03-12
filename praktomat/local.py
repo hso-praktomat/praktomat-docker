@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 # Settings for deployment
 
 from os import environ
-from os.path import join, dirname, basename
-import re
+from os.path import join, dirname
 
 PRAKTOMAT_PATH = dirname(dirname(dirname(__file__)))
 
@@ -39,35 +38,12 @@ TEST_TIMEOUT=180
 
 TEST_MAXFILENUMBER=8192
 
-if "cram" in PRAKTOMAT_ID:
-    TEST_TIMEOUT=600
-    TEST_MAXMEM=200
-
-if "birap" in PRAKTOMAT_ID:
-    TEST_TIMEOUT=600
-
-if "tba" in PRAKTOMAT_ID:
-    TEST_TIMEOUT=600
-
-if "Programmieren" in SITE_NAME or "Programmierung" in SITE_NAME:
-    # Rating overview needs one POST parameter per student
-    # and the default value (1000) might be too low
-    DATA_UPLOAD_MAX_NUMBER_FIELDS = 2000
-    TEST_TIMEOUT=600
-
 # Absolute path to the directory that shall hold all uploaded files as well as
 # files created at runtime.
 
 # Example: "/home/media/media.lawrence.com/"
 UPLOAD_ROOT = join(dirname(PRAKTOMAT_PATH), "work-data/")
 
-
-# SANDBOX_DIR now defined in settings/defaults.py
-
-#if MIRROR:
-#    SANDBOX_DIR = join('/srv/praktomat/sandbox_Mirror/', PRAKTOMAT_ID)
-#else:
-#    SANDBOX_DIR = join('/srv/praktomat/sandbox/', PRAKTOMAT_ID)
 
 ADMINS = [
   ('Praktomat Administrator', environ['PRAKTOMAT_ADMIN'])
@@ -134,7 +110,6 @@ LDAP_URI="ldaps://ldap1.rz.hs-offenburg.de ldaps://ldap2.rz.hs-offenburg.de"
 LDAP_BASE="o=fho"
 
 
-
 SYSADMIN_MOTD_URL = None
 
 # Use a dedicated user to test submissions
@@ -173,8 +148,6 @@ USESAFEDOCKER = False
 # sudo chmod u+x,g+x,o-x praktomat/src/checker/scripts/javac
 
 
-
-
 # Does Apache use "mod_xsendfile" version 1.0?
 # If you use "libapache2-mod-xsendfile", this flag needs to be set to False
 MOD_XSENDFILE_V1_0 = False
@@ -186,11 +159,8 @@ if USING_ISABELLE:
     NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 1
 
 
-
 # Various extra files and versions
-
 JPLAGJAR = '/opt/praktomat-addons/jplag.jar'
-
 CHECKSTYLEALLJAR = '/opt/praktomat-addons/checkstyle-8.14-all.jar'
 
 LANG = "en_US.UTF-8"
