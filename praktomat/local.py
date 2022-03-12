@@ -3,21 +3,22 @@ from __future__ import unicode_literals
 
 # Settings for deployment
 
+from os import environ
 from os.path import join, dirname, basename
 import re
 
 PRAKTOMAT_PATH = dirname(dirname(dirname(__file__)))
 
-PRAKTOMAT_ID = "${id}"
+PRAKTOMAT_ID = environ['COMPOSE_PROJECT_NAME']
 
-SITE_NAME = "${site_name}"
+SITE_NAME = environ['PRAKTOMAT_NAME']
 MIRROR = False
 
 USING_ISABELLE = False
 
 # The URL where this site is reachable. 'http://localhost:443/' in case of the
 # development server.
-BASE_HOST = 'http://${domain}:443'
+BASE_HOST = 'http://' + environ['PRAKTOMAT_DOMAIN'] + ':443'
 BASE_PATH = '/' + PRAKTOMAT_ID + '/'
 
 ALLOWED_HOSTS = [ '*', ]
@@ -67,7 +68,7 @@ UPLOAD_ROOT = join(dirname(PRAKTOMAT_PATH), "work-data/")
 #    SANDBOX_DIR = join('/srv/praktomat/sandbox/', PRAKTOMAT_ID)
 
 ADMINS = [
-  ('Praktomat Administrator', '${server_admin}')
+  ('Praktomat Administrator', environ['PRAKTOMAT_ADMIN'])
 ]
 
 SERVER_EMAIL = 'praktomat@i44vm3.info.uni-karlsruhe.de'

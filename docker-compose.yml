@@ -2,13 +2,7 @@ version: "3.9"
 services:
   praktomat:
     container_name: ${COMPOSE_PROJECT_NAME}_praktomat
-    build:
-      context: praktomat
-      args:
-        ID: ${COMPOSE_PROJECT_NAME}
-        NAME: ${SITE_NAME}
-        ADMIN: ${SERVER_ADMIN}
-        DOMAIN: ${DOMAIN}
+    build: praktomat
     volumes:
       - workdata:/home/praktomat/work-data
     depends_on:
@@ -21,14 +15,21 @@ services:
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.rule=PathPrefix(`/${COMPOSE_PROJECT_NAME}`)
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.tls=true
+    environment:
+      - COMPOSE_PROJECT_NAME
+      - PRAKTOMAT_NAME
+      - PRAKTOMAT_ADMIN
+      - PRAKTOMAT_DOMAIN
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db
-    build:
-      context: postgresql
-      args:
-        ID: ${COMPOSE_PROJECT_NAME}
+    image: postgres:14.2-alpine
+    volumes:
+      - type: bind
+        source: $PWD/postgresql/init.sh
+        target: /docker-entrypoint-initdb.d/init.sh
     environment:
-      POSTGRES_PASSWORD: superuser_password
+      - POSTGRES_PASSWORD=superuser_password
+      - COMPOSE_PROJECT_NAME
     networks:
       - database
 volumes:
