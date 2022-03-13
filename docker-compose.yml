@@ -5,6 +5,9 @@ services:
     build: praktomat
     volumes:
       - workdata:/home/praktomat/work-data
+      - type: bind
+        source: $PRAKTOMAT_EXTERNAL
+        target: /home/praktomat/external
     depends_on:
       - postgresql
     networks:
