@@ -61,9 +61,13 @@ RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/javac
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc21156cfe1694c31d7d1792e/wait-for-it.sh wait-for-it.sh
 RUN sudo chmod 775 wait-for-it.sh
 
-# Install Python requirements
+# Install Python requirements for Praktomat
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtualenv setuptools wheel urllib3[secure]
 RUN python3 -m pip install -r Praktomat/requirements.txt
+
+# Setup our own Praktomat utils
+RUN python3 -m pip install pyyaml
+RUN mkdir utils
 
 # Set executable/search flag for directories (only) located inside of /home/praktomat/.local
 # This is required for Apache in order to follow the symlinks to some files (referenced from static directory)
