@@ -66,7 +66,7 @@ RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtua
 RUN python3 -m pip install -r Praktomat/requirements.txt
 
 # Setup our own Praktomat utils
-RUN python3 -m pip install pyyaml
+RUN sudo -H python3 -m pip install pyyaml
 RUN mkdir utils
 
 # Set executable/search flag for directories (only) located inside of /home/praktomat/.local
