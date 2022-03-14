@@ -6,9 +6,6 @@ services:
     volumes:
       - workdata:/home/praktomat/work-data
       - type: bind
-        source: $PWD/praktomat/utils
-        target: /home/praktomat/utils
-      - type: bind
         source: $PRAKTOMAT_EXTERNAL
         target: /home/praktomat/external
     depends_on:
