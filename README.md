@@ -5,7 +5,7 @@
 ```bash
 docker network create praktomat
 
-docker-compose --env-file=algdat-win.env up -d
+docker-compose --env-file=aud-win.env up -d
 
 cd traefik
 docker-compose up -d
@@ -45,7 +45,7 @@ Those variables are defined through an environment file. There's a template call
 Then start an instance by supplying your environment file. The command looks like the following.
 
 ```bash
-docker-compose up --env-file=algdat-win.env -d
+docker-compose up --env-file=aud-win.env -d
 ```
 
 Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application. The submissions will be stored on a separate volume.
