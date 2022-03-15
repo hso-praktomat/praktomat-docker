@@ -4,7 +4,9 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_praktomat
     build: praktomat
     volumes:
-      - workdata:/home/praktomat/work-data
+      - type: bind
+        source: $HOME/work-data/$COMPOSE_PROJECT_NAME
+        target: /home/praktomat/work-data
       - type: bind
         source: $PRAKTOMAT_EXTERNAL
         target: /home/praktomat/external
@@ -35,8 +37,6 @@ services:
       - COMPOSE_PROJECT_NAME
     networks:
       - database
-volumes:
-  workdata:
 networks:
   database:
     name: ${COMPOSE_PROJECT_NAME}

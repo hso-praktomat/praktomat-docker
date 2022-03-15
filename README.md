@@ -32,7 +32,7 @@ Aside from the labels of other Docker containers, Traefik is configured through 
 
 ## Starting a Praktomat instance
 
-Navigate back to the root directory of this repository. If you're starting a particular instance for the first time, four environment variables need to be set for building the image.
+Navigate back to the root directory of this repository. The following environment variables need to be set for running the container.
 
 - `COMPOSE_PROJECT_NAME`: This is the ID of your Praktomat instance. Practically, this defines where you'll reach your Praktomat instance, e.g. https://localhost/your-praktomat-id.
 - `PRAKTOMAT_NAME`: This is the name of your site. It will be displayed at the top of the web interface.
@@ -42,13 +42,15 @@ Navigate back to the root directory of this repository. If you're starting a par
 
 Those variables are defined through an environment file. There's a template called `template.env`. Make a copy for each Praktomat instance and modify the contained variables to your needs.
 
+Create a directory called `work-data` in your home directory. Then create a subdirectory with the name of `COMPOSE_PROJECT_NAME` for each instance. The submissions for an instance will be stored here.
+
 Then start an instance by supplying your environment file. The command looks like the following.
 
 ```bash
 docker-compose up --env-file=aud-win.env -d
 ```
 
-Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application. The submissions will be stored on a separate volume.
+Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application.
 
 Now, open the CLI of the Praktomat container you just started. The container name usually looks like `<COMPOSE_PROJECT_NAME>-praktomat`.
 
