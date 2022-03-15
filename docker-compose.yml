@@ -2,7 +2,7 @@ version: "3.9"
 services:
   praktomat:
     container_name: ${COMPOSE_PROJECT_NAME}_praktomat
-    build: praktomat
+    image: praktomat
     volumes:
       - type: bind
         source: $HOME/work-data/$COMPOSE_PROJECT_NAME

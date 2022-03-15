@@ -4,6 +4,9 @@
 
 ```bash
 docker network create praktomat
+cd praktomat
+docker build -t praktomat .
+cd ..
 
 docker-compose --env-file=aud-win.env up -d
 
@@ -32,6 +35,12 @@ Aside from the labels of other Docker containers, Traefik is configured through 
 
 ## Starting a Praktomat instance
 
+First, you need to build the Praktomat image. By doing this manually, Docker won't build an extra image for each instance. Naviagate into `praktomat` and build the image with the following command.
+
+```bash
+docker build -t praktomat .
+```
+
 Navigate back to the root directory of this repository. The following environment variables need to be set for running the container.
 
 - `COMPOSE_PROJECT_NAME`: This is the ID of your Praktomat instance. Practically, this defines where you'll reach your Praktomat instance, e.g. https://localhost/your-praktomat-id.
@@ -52,7 +61,7 @@ docker-compose up --env-file=aud-win.env -d
 
 Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application.
 
-Now, open the CLI of the Praktomat container you just started. The container name usually looks like `<COMPOSE_PROJECT_NAME>-praktomat`.
+Now, open the CLI of the Praktomat container you just started. The container name usually looks like `<COMPOSE_PROJECT_NAME>_praktomat`.
 
 ```bash
 docker exec -it <container name> /bin/bash
