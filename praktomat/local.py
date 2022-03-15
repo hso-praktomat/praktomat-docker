@@ -153,7 +153,8 @@ USESAFEDOCKER = False
 MOD_XSENDFILE_V1_0 = False
 
 # Our VM has 4 cores, so lets try to use them
-NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 6
+# But Gradle has a common build directory for a project
+NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 1
 # But not with Isabelle, which is memory bound
 if USING_ISABELLE:
     NUMBER_OF_TASKS_TO_BE_CHECKED_IN_PARALLEL = 1
