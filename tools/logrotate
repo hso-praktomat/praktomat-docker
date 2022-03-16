@@ -1,0 +1,15 @@
+/var/log/praktomat/backup.log {
+  rotate 7
+  weekly
+  compress
+  missingok
+  notifempty
+}
+
+/var/log/praktomat/syscheck.log {
+  rotate 72
+  weekly
+  compress
+  missingok
+  notifempty
+}
