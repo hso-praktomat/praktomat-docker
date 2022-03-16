@@ -2,11 +2,11 @@ from shell import *
 from datetime import date
 
 thisDir = dirname(__file__)
-topDir = pjoin(thisDir, "..")
+topDir = abspath(pjoin(thisDir, ".."))
 pgBackupDir = f'{HOME}/pgbackup'
 
 def doBackup():
-    run(f'{topDir}/run-tivoli-client dsmc incr /data')
+    run(f'{topDir}/tivoli-client/run-tivoli-client dsmc incr /data')
 
 def freeFilename(name, ext):
     cand = name + ext
