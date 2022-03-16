@@ -72,7 +72,8 @@ def check(config):
             reportError(f'URL {url} is not accessible')
 
 def main():
-    info("\nNew syscheck run ...")
+    print()
+    info("New syscheck run ...")
     config = Config(minMemory=1000, minDisk=5000, minInodes=20000,
         diskPath='/',
         urls=['https://progcheck.emi.hs-offenburg.de/aud-ai',
