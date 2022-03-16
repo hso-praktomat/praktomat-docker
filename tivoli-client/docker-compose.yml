@@ -10,5 +10,6 @@ services:
       - type: bind
         source: $PWD/dsm.sys
         target: /opt/tivoli/tsm/client/ba/bin/dsm.sys
-      - /home/progcheck/data:/data
-      - /home/progcheck/tivoli-logs:/logs
+      - /home/progcheck:/data
+      - /var/log/tivoli:/logs
+      - /home/progcheck/tivoli-config:/etc/adsm
