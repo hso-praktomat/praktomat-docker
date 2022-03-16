@@ -2,6 +2,7 @@ from shell import *
 from dataclasses import dataclass
 import sys
 import traceback
+from utils import *
 
 @dataclass
 class Config:
@@ -10,9 +11,6 @@ class Config:
     minDisk: int
     minInodes: int
     urls: list
-
-def info(s):
-    print(s)
 
 ERROR_COUNT = 0
 def reportError(msg):
@@ -74,6 +72,7 @@ def check(config):
             reportError(f'URL {url} is not accessible')
 
 def main():
+    info("new syscheck run ...")
     config = Config(minMemory=1000, minDisk=5000, minInodes=20000,
         diskPath='/',
         urls=['https://progcheck.emi.hs-offenburg.de/aud-ai',
@@ -82,7 +81,11 @@ def main():
     check(config)
     if ERROR_COUNT > 1:
         sys.stderr.write(f'ERROR: {ERROR_COUNT} check(s) FAILED!\n')
+        info(f"syscheck run finished with {ERROR_COUNT} errors")
         sys.exit(1)
+    else:
+        info("syscheck run finished without errors")
+        sys.exit(0)
 
 if __name__ == '__main__':
     main()
