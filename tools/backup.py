@@ -31,7 +31,7 @@ def dumpPostgres(container, dbName):
     run(cmd)
 
 def backup(containerWithDbs):
-    info('New backup run ...')
+    info('\nNew backup run ...')
     for (container, db) in containerWithDbs:
         dumpPostgres(container, db)
     doBackup()
