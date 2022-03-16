@@ -82,6 +82,7 @@ def main():
     check(config)
     if ERROR_COUNT > 1:
         sys.stderr.write(f'ERROR: {ERROR_COUNT} check(s) FAILED!\n')
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

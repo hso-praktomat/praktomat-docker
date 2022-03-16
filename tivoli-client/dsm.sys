@@ -7,19 +7,19 @@ Nodename progcheck
 
 * client acceptor daemon  web client agent service port
 * diese Ports in (lokaler) Firewall freischalten
-webports 2123 2124
-httpport 1581
+* webports 2123 2124
+* httpport 1581
 
 *dsmcad startet Web Client und Scheduler
 *Web Client bei Bedarf temporaer aktivieren
 *MANAGEDSERVICES WEBCLIENT SCHEDULE
 *MANAGEDSERVICES SCHEDULE
 
-*Notwenig fuer Web client
+*Notwendig fuer Web client
 passwordaccess generate
 
 encryptkey save
-encryptiontype AES128
+encryptiontype AES256
 
 compression yes
 txnbytelimit 1G
