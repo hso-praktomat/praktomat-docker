@@ -32,7 +32,12 @@ RUN apt-get update && apt-get install -yq \
   python3-virtualenv \
   python3-pip \
   sudo \
+  locales \
   && rm -rf /var/lib/apt/lists/*
+
+# Setup locale
+COPY locale /etc/default/locale
+RUN locale-gen en_US.UTF-8
 
 # Install Gradle
 ADD https://services.gradle.org/distributions/gradle-7.4-bin.zip /gradle.zip
