@@ -32,7 +32,11 @@ services:
       - type: bind
         source: $PWD/postgresql/init.sh
         target: /docker-entrypoint-initdb.d/init.sh
+      - type: bind
+        source: $HOME/postgresql/$COMPOSE_PROJECT_NAME
+        target: /var/lib/postgresql/data
     environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=superuser_password
       - COMPOSE_PROJECT_NAME
     networks:
