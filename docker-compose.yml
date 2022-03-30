@@ -38,7 +38,6 @@ services:
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=superuser_password
-      - COMPOSE_PROJECT_NAME
     networks:
       - database
 networks:
