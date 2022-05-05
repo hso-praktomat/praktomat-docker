@@ -36,8 +36,10 @@ RUN apt-get update && apt-get install -yq \
   && rm -rf /var/lib/apt/lists/*
 
 # Setup locale
-COPY locale /etc/default/locale
 RUN locale-gen en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
 # Install Gradle
 ADD https://services.gradle.org/distributions/gradle-7.4-bin.zip /gradle.zip
