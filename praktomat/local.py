@@ -163,6 +163,18 @@ CHECKSTYLEALLJAR = '/opt/praktomat-addons/checkstyle-8.14-all.jar'
 LANG = "en_US.UTF-8"
 LANGUAGE = "en_US:en"
 
+MIMETYPE_ADDITIONAL_EXTENSIONS = \
+    [("application/x-iml", ".iml"),
+     ("application/yaml", ".yml"),
+     ("application/yaml", ".yaml"),
+     ("text/plain", ".properties"),
+     ("text/x-gradle", ".gradle"),
+     ("text/x-gradle", ".gradle.kts"),
+     ("text/x-isabelle", ".thy"),
+     ("text/x-lean", ".lean"),
+     ("text/x-log", ".log"),
+     ("text/x-r-script", ".R"),]
+
 # Finally load defaults for missing settings.
 from . import defaults
 defaults.load_defaults(globals())
