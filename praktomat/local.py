@@ -105,6 +105,7 @@ LDAP_ENABLED = True
 LDAP_URI="ldaps://ldap1.rz.hs-offenburg.de ldaps://ldap2.rz.hs-offenburg.de" 
 LDAP_BASE="o=fho"
 
+DUMMY_MAT_NUMBERS = True
 
 SYSADMIN_MOTD_URL = None
 
