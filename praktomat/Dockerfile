@@ -42,12 +42,12 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Install Gradle
-ADD https://services.gradle.org/distributions/gradle-7.4-bin.zip /gradle.zip
+ADD https://services.gradle.org/distributions/gradle-7.5-bin.zip /gradle.zip
 RUN mkdir /opt/gradle
 RUN unzip -d /opt/gradle /gradle.zip
 RUN rm /gradle.zip
-RUN chmod -R 775 /opt/gradle/gradle-7.4/bin
-RUN ln -s /opt/gradle/gradle-7.4/bin/* /usr/local/bin
+RUN chmod -R 775 /opt/gradle/gradle-7.5/bin
+RUN ln -s /opt/gradle/gradle-7.5/bin/* /usr/local/bin
 
 # Add users
 RUN useradd -m praktomat && adduser praktomat sudo
