@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:bionic
+FROM ubuntu:jammy
 EXPOSE 443/tcp
 
 # Setup timezone
