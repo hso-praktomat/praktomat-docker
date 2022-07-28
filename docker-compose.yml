@@ -27,7 +27,7 @@ services:
       - PRAKTOMAT_DOMAIN
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db
-    image: postgres:14.2-alpine
+    image: postgres:14.4-alpine
     volumes:
       - type: bind
         source: $PWD/postgresql/init.sh
