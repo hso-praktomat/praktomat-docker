@@ -20,11 +20,7 @@ RUN apt-get update && apt-get install -yq \
   swig \
   libapache2-mod-xsendfile \
   libapache2-mod-wsgi-py3 \
-  openjdk-17-jdk \
-  junit \
-  junit4 \
-  dejagnu \
-  r-base \
+  openjdk-17-jre-headless \
   git-core \
   libldap2-dev \
   python3-setuptools \
@@ -33,6 +29,12 @@ RUN apt-get update && apt-get install -yq \
   python3-pip \
   sudo \
   locales \
+  libipc-run-perl \
+  libdata-guid-perl \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release \
   && rm -rf /var/lib/apt/lists/*
 
 # Setup locale
@@ -41,13 +43,15 @@ RUN update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
-# Install Gradle
-ADD https://services.gradle.org/distributions/gradle-7.5-bin.zip /gradle.zip
-RUN mkdir /opt/gradle
-RUN unzip -d /opt/gradle /gradle.zip
-RUN rm /gradle.zip
-RUN chmod -R 775 /opt/gradle/gradle-7.5/bin
-RUN ln -s /opt/gradle/gradle-7.5/bin/* /usr/local/bin
+# Install Docker
+RUN sudo mkdir -p /etc/apt/keyrings
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+RUN echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN apt-get update && apt-get install -yq \
+  docker-ce-cli \
+  && rm -rf /var/lib/apt/lists/*
 
 # Add users
 RUN useradd -m praktomat && adduser praktomat sudo
@@ -57,8 +61,8 @@ RUN chmod 440 /etc/sudoers
 
 USER praktomat
 WORKDIR /home/praktomat
-RUN git clone --recursive https://github.com/KITPraktomatTeam/Praktomat.git
-RUN cd Praktomat && git checkout 92d1cf50157426e7aa3cd20e665bfb31ffe2f25a
+RUN git clone --recursive https://github.com/hannesbraun/Praktomat.git
+RUN cd Praktomat && git checkout 8e9f420d9ba71f75aa294bba013ac33d4dc7c816
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
@@ -72,9 +76,6 @@ RUN sudo chmod 775 wait-for-it.sh
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtualenv setuptools wheel urllib3[secure]
 RUN python3 -m pip install -r Praktomat/requirements.txt
 
-# Install pyyaml (may be required for some external utilities)
-RUN sudo -H python3 -m pip install pyyaml
-
 # Set executable/search flag for directories (only) located inside of /home/praktomat/.local
 # This is required for Apache in order to follow the symlinks to some files (referenced from static directory)
 RUN chmod -R g+X .local
@@ -83,6 +84,9 @@ RUN chmod -R g+X .local
 ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /opt/praktomat-addons/jplag.jar
 ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/checkstyle-8.14-all.jar /opt/praktomat-addons/checkstyle-8.14-all.jar
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
+
+# Install safe-docker
+RUN sudo cp Praktomat/scripts/safe-docker /usr/local/bin/safe-docker
 
 # Copy config file
 COPY local.py Praktomat/src/settings/local.py
@@ -106,6 +110,6 @@ COPY CA17.pem /etc/ssl/certs/CA17.pem
 RUN printf "\nTLS_CACERT    /etc/ssl/certs/CA17.pem\n" | sudo tee -a /etc/ldap/ldap.conf
 
 # Initialize Praktomat
-RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_DOMAIN="" python3 Praktomat/src/manage-local.py collectstatic --noinput --link
+RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_CHECKER_IMAGE="" PRAKTOMAT_CHECKER_UID_MOD="" PRAKTOMAT_CHECKER_WRITABLE="" PRAKTOMAT_DOMAIN="" python3 Praktomat/src/manage-local.py collectstatic --noinput --link
 
 ENTRYPOINT ./wait-for-it.sh postgresql:5432 -- python3 Praktomat/src/manage-local.py migrate --noinput && sudo -E apache2ctl -DFOREGROUND

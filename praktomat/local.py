@@ -35,6 +35,7 @@ TEST_MAXLOGSIZE=512
 TEST_MAXFILESIZE=512*1024
 
 TEST_TIMEOUT=60
+TEST_MAXMEM=1000
 
 TEST_MAXFILENUMBER=8192
 
@@ -110,12 +111,16 @@ DUMMY_MAT_NUMBERS = True
 SYSADMIN_MOTD_URL = None
 
 # Use a dedicated user to test submissions
-USEPRAKTOMATTESTER = True
+USEPRAKTOMATTESTER = False
 
 # It is recomendet to use DOCKER and not a tester account
 # for using Docker from https://github.com/nomeata/safe-docker
 # Use docker to test submission
-USESAFEDOCKER = False
+USESAFEDOCKER = True
+SAFE_DOCKER_PATH = '/usr/local/bin/safe-docker'
+DOCKER_IMAGE_NAME = environ['PRAKTOMAT_CHECKER_IMAGE']
+DOCKER_CONTAINER_WRITABLE = environ['PRAKTOMAT_CHECKER_WRITABLE'] == 'True'
+DOCKER_UID_MOD = environ['PRAKTOMAT_CHECKER_UID_MOD'] == 'True'
 
 # Linux User "tester" and Usergroup "praktomat"
 # Enable to run all scripts (checker) as the unix user 'tester'.
