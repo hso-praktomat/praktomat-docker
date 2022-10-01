@@ -104,6 +104,7 @@ RUN sudo a2enmod macro
 COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
 COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
 RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
+COPY mpm_event.conf /etc/apache2/mods-available/mpm_event.conf
 
 # Configure OpenLDAP
 COPY CA17.pem /etc/ssl/certs/CA17.pem
