@@ -34,7 +34,8 @@ TEST_MAXLOGSIZE=512
 
 TEST_MAXFILESIZE=512*1024
 
-TEST_TIMEOUT=180
+TEST_TIMEOUT=60
+TEST_MAXMEM=1000
 
 TEST_MAXFILENUMBER=8192
 
@@ -69,7 +70,7 @@ DEBUG = MIRROR
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME':   'praktomat_'+PRAKTOMAT_ID,
+            'NAME':   'praktomat',
             'USER':   'praktomat',
             'PASSWORD':   'praktomat_password',
             'HOST':   'postgresql',
@@ -102,23 +103,24 @@ REGISTRATION_POSSIBLE = False
 # to see how to overwrite SHIB_ATTRIBUTE_MAP , SHIB_USERNAME , SHIB_PROVIDER
 
 LDAP_ENABLED = True
-AUTHENTICATION_BACKENDS = (
-    "accounts.ldap_auth.LDAPBackend",
-	"django.contrib.auth.backends.ModelBackend",
-)
 LDAP_URI="ldaps://ldap1.rz.hs-offenburg.de ldaps://ldap2.rz.hs-offenburg.de" 
 LDAP_BASE="o=fho"
 
+DUMMY_MAT_NUMBERS = True
 
 SYSADMIN_MOTD_URL = None
 
 # Use a dedicated user to test submissions
-USEPRAKTOMATTESTER = True
+USEPRAKTOMATTESTER = False
 
 # It is recomendet to use DOCKER and not a tester account
 # for using Docker from https://github.com/nomeata/safe-docker
 # Use docker to test submission
-USESAFEDOCKER = False
+USESAFEDOCKER = True
+SAFE_DOCKER_PATH = '/usr/local/bin/safe-docker'
+DOCKER_IMAGE_NAME = environ['PRAKTOMAT_CHECKER_IMAGE']
+DOCKER_CONTAINER_WRITABLE = environ['PRAKTOMAT_CHECKER_WRITABLE'] == 'True'
+DOCKER_UID_MOD = environ['PRAKTOMAT_CHECKER_UID_MOD'] == 'True'
 
 # Linux User "tester" and Usergroup "praktomat"
 # Enable to run all scripts (checker) as the unix user 'tester'.
@@ -166,6 +168,18 @@ CHECKSTYLEALLJAR = '/opt/praktomat-addons/checkstyle-8.14-all.jar'
 
 LANG = "en_US.UTF-8"
 LANGUAGE = "en_US:en"
+
+MIMETYPE_ADDITIONAL_EXTENSIONS = \
+    [("application/x-iml", ".iml"),
+     ("application/yaml", ".yml"),
+     ("application/yaml", ".yaml"),
+     ("text/plain", ".properties"),
+     ("text/x-gradle", ".gradle"),
+     ("text/x-gradle", ".gradle.kts"),
+     ("text/x-isabelle", ".thy"),
+     ("text/x-lean", ".lean"),
+     ("text/x-log", ".log"),
+     ("text/x-r-script", ".R"),]
 
 # Finally load defaults for missing settings.
 from . import defaults

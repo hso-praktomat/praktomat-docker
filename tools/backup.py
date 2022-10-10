@@ -26,7 +26,7 @@ def dumpPostgres(container, dbName):
     today = date.today().isoformat()
     basename = pjoin(pgBackupDir, f'pg_dump_{container}_{dbName}_{today}')
     backupName = freeFilename(basename, '.gz')
-    cmd = f"docker exec -ti {container} pg_dump -U postgres {dbName} | gzip > {backupName}"
+    cmd = f"docker exec {container} pg_dump -U postgres {dbName} | gzip > {backupName}"
     info(cmd)
     run(cmd)
 
@@ -46,8 +46,6 @@ def backup(containerWithDbs):
 
 if __name__ == '__main__':
     backup([
-        ('aud-win_db', 'praktomat_default'),
-        ('aud-win_db', 'praktomat_aud-win'),
-        ('aud-ai_db', 'praktomat_default'),
-        ('aud-ai_db', 'praktomat_aud-ai')
+        ('prog1-aki_db', 'praktomat'),
+        ('java-aki_db', 'praktomat')
     ])
