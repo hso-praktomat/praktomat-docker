@@ -7,7 +7,7 @@ RUN useradd -m praktomat
 RUN chmod 1777 /home
 
 # Setup CheckStyle
-ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /opt/praktomat-addons/jplag.jar
+ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/checkstyle-8.14-all.jar /opt/praktomat-addons/checkstyle-8.14-all.jar
 
 # Setup timezone
 ENV TZ Europe/Berlin
