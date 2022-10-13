@@ -32,7 +32,7 @@ def dumpPostgres(container, dbName):
 
 def cleanup():
     info('Cleaning up postgres backups older than 7 days ...')
-    run('find {pgBackupDir} -type f -mtime +7 -print -delete')
+    run(f'find {pgBackupDir} -type f -mtime +7 -print -delete')
     info('Finished postgres cleanup')
 
 def backup(containerWithDbs):
