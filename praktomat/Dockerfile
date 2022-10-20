@@ -3,6 +3,7 @@ FROM ubuntu:jammy
 EXPOSE 443/tcp
 
 # Setup timezone
+# Installing tzdata in the next step is required too
 ENV TZ Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -29,6 +30,7 @@ RUN apt-get update && apt-get install -yq \
   python3-pip \
   sudo \
   locales \
+  tzdata \
   libipc-run-perl \
   libdata-guid-perl \
   ca-certificates \
