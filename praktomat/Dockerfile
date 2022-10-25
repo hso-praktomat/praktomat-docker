@@ -85,7 +85,6 @@ RUN chmod -R g+X .local
 
 # Install Praktomat addons
 ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /opt/praktomat-addons/jplag.jar
-ADD https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.14/checkstyle-8.14-all.jar /opt/praktomat-addons/checkstyle-8.14-all.jar
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
 
 # Install safe-docker
