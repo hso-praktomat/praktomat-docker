@@ -164,7 +164,7 @@ if USING_ISABELLE:
 
 # Various extra files and versions
 JPLAGJAR = '/opt/praktomat-addons/jplag.jar'
-CHECKSTYLEALLJAR = '/opt/praktomat-addons/checkstyle-8.14-all.jar'
+CHECKSTYLEALLJAR = '/opt/praktomat-addons/checkstyle.jar'
 
 LANG = "en_US.UTF-8"
 LANGUAGE = "en_US:en"
