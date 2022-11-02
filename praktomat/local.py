@@ -121,6 +121,7 @@ SAFE_DOCKER_PATH = '/usr/local/bin/safe-docker'
 DOCKER_IMAGE_NAME = environ['PRAKTOMAT_CHECKER_IMAGE']
 DOCKER_CONTAINER_WRITABLE = environ['PRAKTOMAT_CHECKER_WRITABLE'] == 'True'
 DOCKER_UID_MOD = environ['PRAKTOMAT_CHECKER_UID_MOD'] == 'True'
+DOCKER_CONTAINER_EXTERNAL_DIR = environ.get('PRAKTOMAT_CHECKER_EXTERNAL_DIR')
 
 # Linux User "tester" and Usergroup "praktomat"
 # Enable to run all scripts (checker) as the unix user 'tester'.
