@@ -183,6 +183,10 @@ MIMETYPE_ADDITIONAL_EXTENSIONS = \
      ("text/x-log", ".log"),
      ("text/x-r-script", ".R"),]
 
+# There's something fishy with the maximum file size set via ulimit
+# We set it to a large value to avoid problems with the Haskell checker
+TEST_MAXFILESIZE=1000000000
+
 # Finally load defaults for missing settings.
 from . import defaults
 defaults.load_defaults(globals())
