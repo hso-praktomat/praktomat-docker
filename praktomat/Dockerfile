@@ -115,4 +115,6 @@ RUN printf "\nTLS_CACERT    /etc/ssl/certs/CA17.pem\n" | sudo tee -a /etc/ldap/l
 # Initialize Praktomat
 RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_CHECKER_IMAGE="" PRAKTOMAT_CHECKER_UID_MOD="" PRAKTOMAT_CHECKER_WRITABLE="" PRAKTOMAT_DOMAIN="" python3 Praktomat/src/manage-local.py collectstatic --noinput --link
 
-ENTRYPOINT ./wait-for-it.sh postgresql:5432 -- python3 Praktomat/src/manage-local.py migrate --noinput && sudo -E apache2ctl -DFOREGROUND
+COPY run.sh run.sh
+RUN sudo chmod 775 run.sh
+ENTRYPOINT ./run.sh
