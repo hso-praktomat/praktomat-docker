@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -yq \
   sudo \
   locales \
   tzdata \
+  cron \
   libipc-run-perl \
   libdata-guid-perl \
   ca-certificates \
@@ -114,6 +115,10 @@ RUN printf "\nTLS_CACERT    /etc/ssl/certs/CA17.pem\n" | sudo tee -a /etc/ldap/l
 
 # Initialize Praktomat
 RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_CHECKER_IMAGE="" PRAKTOMAT_CHECKER_UID_MOD="" PRAKTOMAT_CHECKER_WRITABLE="" PRAKTOMAT_DOMAIN="" python3 Praktomat/src/manage-local.py collectstatic --noinput --link
+
+# Configure Cron to automatically run all checkers
+COPY daily-cron.sh daily-cron.sh
+RUN (crontab -l ; echo "0 3 * * * bash /home/praktomat/daily-cron.sh >> /home/praktomat/cronlog 2>&1") | crontab -
 
 COPY run.sh run.sh
 RUN sudo chmod 775 run.sh
