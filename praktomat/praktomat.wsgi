@@ -33,8 +33,6 @@ else:
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.%s' % (settings_module)) # only set DJANGO_SETTINGS_MODULE if it is not setted at moment
 
 import sys
-PY2 = sys.version_info[0] == 2
-PY3 = sys.version_info[0] == 3
 
 sys.path.append(join(dirname(dirname(__file__)), "src"))
 
