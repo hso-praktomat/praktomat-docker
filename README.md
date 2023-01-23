@@ -22,7 +22,7 @@ Create a network called `praktomat` to which the individual Praktomat instances 
 docker network create praktomat
 ```
 
-We're using [Traefik](https://github.com/traefik/traefik) as a reverse proxy for this setup. Traefik is responsible for the TLS encryption as well as the routing to the various Praktomat instances running on your host. 
+We're using [Traefik](https://github.com/traefik/traefik) as a reverse proxy for this setup. Traefik is responsible for the TLS encryption as well as the routing to the various Praktomat instances running on your host.
 Copy over the SSL/TLS certificate to `traefik/cert.pem` and the private key to `traefik/key.pem`. The routing to the individual Praktomat instances will happen automatically via labels.
 
 Now, start up the Traefik container.
