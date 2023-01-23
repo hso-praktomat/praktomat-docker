@@ -74,3 +74,11 @@ python3 Praktomat/src/manage-local.py createsuperuser
 ```
 
 The application is accessible on https://PRAKTOMAT_DOMAIN/COMPOSE_PROJECT_NAME.
+
+## Operations
+
+Here are some notes on operating praktomat.
+
+- Directory $HOME/work-data/$COMPOSE_PROJECT_NAME/sent-mails stores a
+  logfile for each errors that occurs while praktomat is
+  running. (Normally, an email is sent in such a situation.)
