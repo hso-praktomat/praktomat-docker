@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $(dirname $0)
-docker-compose run tivoli-client "$@" 2> >(grep -v '^Creating tivoli-client_tivoli-client_run')
+docker-compose run --rm tivoli-client "$@" 2> >(grep -v '^Creating tivoli-client_tivoli-client_run')
