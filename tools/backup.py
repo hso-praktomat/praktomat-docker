@@ -47,6 +47,7 @@ def backup(containerWithDbs):
 
 if __name__ == '__main__':
     backup([
-        ('prog1-aki_db', 'praktomat'),
-        ('java-aki_db', 'praktomat')
+        ('prog2-aki_db', 'praktomat'),
+        ('aud-ai_db', 'praktomat'),
+        ('aud-win_db', 'praktomat')
     ])

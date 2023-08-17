@@ -4,6 +4,10 @@ import sys
 import traceback
 from utils import *
 
+URLs = ['https://progcheck.emi.hs-offenburg.de/aud-ai/',
+        'https://progcheck.emi.hs-offenburg.de/aud-win/',
+        'https://progcheck.emi.hs-offenburg.de/prog2-aki/']
+
 @dataclass
 class Config:
     minMemory: int
@@ -76,8 +80,7 @@ def main():
     info("New syscheck run ...")
     config = Config(minMemory=1000, minDisk=5000, minInodes=20000,
         diskPath='/',
-        urls=['https://progcheck.emi.hs-offenburg.de/java-aki',
-              'https://progcheck.emi.hs-offenburg.de/prog1-aki']
+        urls=URLs
     )
     check(config)
     if ERROR_COUNT > 1:
