@@ -26,6 +26,7 @@ def dumpPostgres(container, dbName):
     today = date.today().isoformat()
     basename = pjoin(pgBackupDir, f'pg_dump_{container}_{dbName}_{today}')
     backupName = freeFilename(basename, '.gz')
+    run(f"docker exec {container} true")
     cmd = f"docker exec {container} pg_dump -U postgres {dbName} | gzip > {backupName}"
     info(cmd)
     run(cmd)
