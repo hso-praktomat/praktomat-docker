@@ -1,25 +1,17 @@
 version: "3.9"
 services:
   traefik:
-    image: traefik:v2.9
+    image: traefik:v2.10.4
     ports:
       - 443:443
     networks:
       - praktomat
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - type: bind
-        source: $PWD/traefik.toml
-        target: /traefik.toml
-      - type: bind
-        source: $PWD/traefik_dynamic.toml
-        target: /traefik_dynamic.toml
-      - type: bind
-        source: $PWD/cert.pem
-        target: /cert.pem
-      - type: bind
-        source: $PWD/key.pem
-        target: /key.pem
+      - $PWD/traefik.toml:/traefik.toml
+      - $PWD/traefik_dynamic.toml:/traefik_dynamic.toml
+      - $PWD/cert.pem:/cert.pem
+      - $PWD/key.pem:/key.pem
 networks:
   praktomat:
     external: true

@@ -17,7 +17,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.rule=PathPrefix(`/${COMPOSE_PROJECT_NAME}`)
       - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
-      - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.tls=true
+      - traefik.http.routers.praktomat-${COMPOSE_PROJECT_NAME}.tls=$PRAKTOMAT_PRODUCTIVE
     environment:
       - COMPOSE_PROJECT_NAME
       - PRAKTOMAT_NAME
@@ -32,12 +32,8 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_db
     image: postgres:15.2-alpine
     volumes:
-      - type: bind
-        source: $PWD/postgresql/init.sh
-        target: /docker-entrypoint-initdb.d/init.sh
-      - type: bind
-        source: $HOME/postgresql/$COMPOSE_PROJECT_NAME
-        target: /var/lib/postgresql/data
+    - $PWD/postgresql/init.sh:/docker-entrypoint-initdb.d/init.sh
+    - $HOME/postgresql/$COMPOSE_PROJECT_NAME:/var/lib/postgresql/data
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=superuser_password
@@ -48,3 +44,4 @@ networks:
     name: ${COMPOSE_PROJECT_NAME}
   praktomat:
     external: true
+
