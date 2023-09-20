@@ -48,6 +48,7 @@ Navigate back to the root directory of this repository. The following environmen
 - `PRAKTOMAT_ADMIN`: The email address of the administrator for the Praktomat instance
 - `PRAKTOMAT_DOMAIN`: The domain under which your instance(s) will be reachable
 - `PRAKTOMAT_EXTERNAL`: The path to a directory that will be accessible via a bind mount in the Praktomat instance at `/home/praktomat/external`
+- `PRAKTOMAT_PRODUCTIVE`: The variable will enable the TLS protocol in the `docker-compose.yml`. For local tests on localhost the variable should be set to `false`.
 
 Those variables are defined through an environment file. There's a template called `template.env`. Make a copy for each Praktomat instance and modify the contained variables to your needs.
 
@@ -56,7 +57,7 @@ Create a directory called `work-data` in your home directory. Then create a subd
 Then start an instance by supplying your environment file. The command looks like the following.
 
 ```bash
-docker-compose up --env-file=aud-win.env -d
+docker-compose --env-file=aud-win.env up -d
 ```
 
 Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application.
@@ -79,6 +80,6 @@ The application is accessible on https://PRAKTOMAT_DOMAIN/COMPOSE_PROJECT_NAME.
 
 Here are some notes on operating praktomat.
 
-- Directory $HOME/work-data/$COMPOSE_PROJECT_NAME/sent-mails stores a
-  logfile for each errors that occurs while praktomat is
+- Directory `$HOME/work-data/$COMPOSE_PROJECT_NAME/sent-mails` stores a
+  logfile for each error that occurs while praktomat is
   running. (Normally, an email is sent in such a situation.)
