@@ -95,9 +95,7 @@ RUN sudo cp Praktomat/scripts/safe-docker /usr/local/bin/safe-docker
 COPY local.py Praktomat/src/settings/local.py
 
 # Setup required directories
-RUN mkdir debug-data
-RUN mkdir work-data
-RUN mkdir test-data
+RUN mkdir debug-data work-data test-data
 
 # Configure Apache2
 ENV APACHE_RUN_USER www-data
