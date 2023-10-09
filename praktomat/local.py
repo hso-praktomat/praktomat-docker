@@ -107,6 +107,7 @@ LDAP_URI="ldaps://ldap1.rz.hs-offenburg.de ldaps://ldap2.rz.hs-offenburg.de"
 LDAP_BASE="o=fho"
 
 DUMMY_MAT_NUMBERS = True
+ACCOUNT_CHANGE_POSSIBLE = False
 
 SYSADMIN_MOTD_URL = None
 
