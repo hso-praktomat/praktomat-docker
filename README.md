@@ -83,3 +83,11 @@ Here are some notes on operating praktomat.
 - Directory `$HOME/work-data/$COMPOSE_PROJECT_NAME/sent-mails` stores a
   logfile for each error that occurs while praktomat is
   running. (Normally, an email is sent in such a situation.)
+- Firefox requires a full certificate chain in some situations. Make sure to
+  point Traefik to a full certificate chain in this case. If you don't have
+  this, you can generate it by appending the other certificates to your actual
+  certificate (in case you're using .pem files). Don't prepend them though,
+  otherwise you'll get an issue that the private key doesn't match.
+  If you don't have the missing certificates, try using a browser that doesn't
+  has issues similar to the ones from Firefox and extract them from there.
+  Safari did the job for me.
