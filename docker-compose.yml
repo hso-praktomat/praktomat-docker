@@ -30,7 +30,7 @@ services:
       - PRAKTOMAT_DOMAIN
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db
-    image: postgres:15.2-alpine
+    image: postgres:16.2-alpine
     volumes:
     - $PWD/postgresql/init.sh:/docker-entrypoint-initdb.d/init.sh
     - $HOME/postgresql/$COMPOSE_PROJECT_NAME:/var/lib/postgresql/data
