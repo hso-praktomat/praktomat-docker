@@ -124,6 +124,7 @@ DOCKER_CONTAINER_WRITABLE = environ['PRAKTOMAT_CHECKER_WRITABLE'] == 'True'
 DOCKER_UID_MOD = environ['PRAKTOMAT_CHECKER_UID_MOD'] == 'True'
 DOCKER_CONTAINER_EXTERNAL_DIR = environ.get('PRAKTOMAT_CHECKER_EXTERNAL_DIR')
 DOCKER_CONTAINER_HOST_NET = environ.get('PRAKTOMAT_CHECKER_ENABLE_NETWORK') == 'True'
+DOCKER_DISCARD_ARTEFACTS = True
 
 # Linux User "tester" and Usergroup "praktomat"
 # Enable to run all scripts (checker) as the unix user 'tester'.
