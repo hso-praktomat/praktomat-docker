@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+body {
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.instance-box {
+    background-color: ddd;
+    margin: .5rem;
+    padding: .5rem;
+}
+        </style>
+        <title>Available Praktomat instances</title>
+    </head>
+    <body>
+        <header>
+            <h1>Available Praktomat instances</h1>
+        </header>
+        <main>
+            <!-- INSTANCES -->
+        </main>
+    </body>
+</html>

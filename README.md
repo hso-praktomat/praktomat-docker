@@ -76,6 +76,16 @@ python3 Praktomat/src/manage-local.py createsuperuser
 
 The application is accessible on https://PRAKTOMAT_DOMAIN/COMPOSE_PROJECT_NAME.
 
+## Overview page
+
+An overview page for all running instances is available on
+https://PRAKTOMAT_DOMAIN/.
+
+To generate the overview page for all the instances running,
+run `traefik/overview-page/generate.py` on the host system and supply all the
+paths to the env files that shall be included. The Python package libPyshell
+needs to be installed for the script to work.
+
 ## Operations
 
 Here are some notes on operating praktomat.

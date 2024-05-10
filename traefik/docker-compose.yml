@@ -11,6 +11,20 @@ services:
       - $PWD/traefik_dynamic.toml:/traefik_dynamic.toml
       - $PWD/cert.pem:/cert.pem
       - $PWD/key.pem:/key.pem
+  overview-page:
+    image: kimchi
+    build:
+      context: ./kimchi
+      dockerfile: Dockerfile
+    networks:
+      - praktomat
+    volumes:
+      - $PWD/overview-page/output:/page
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.overview-page.rule=PathPrefix(`/`)
+      - traefik.http.routers.overview-page.entrypoints=websecure
+      - traefik.http.routers.overview-page.tls=true
 networks:
   praktomat:
     external: true
