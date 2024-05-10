@@ -39,6 +39,10 @@ TEST_MAXMEM=1000
 
 TEST_MAXFILENUMBER=8192
 
+# Saving an attestation for a solution with a lot of files might fail with the
+# default value of 1000.
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 2000
+
 # Absolute path to the directory that shall hold all uploaded files as well as
 # files created at runtime.
 
