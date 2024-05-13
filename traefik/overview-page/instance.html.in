@@ -1,5 +1,5 @@
 <div class="instance-box">
     <!-- NAME -->
     <hr>
-    <a href="<!-- DOMAIN -->/<!-- ID -->>">https://<!-- DOMAIN -->/<!-- ID --></a>
+    <a href="https://<!-- DOMAIN -->/<!-- ID -->">https://<!-- DOMAIN -->/<!-- ID --></a>
 </div>
