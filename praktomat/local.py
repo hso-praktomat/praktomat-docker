@@ -181,6 +181,7 @@ MIMETYPE_ADDITIONAL_EXTENSIONS = \
     [("application/x-iml", ".iml"),
      ("application/yaml", ".yml"),
      ("application/yaml", ".yaml"),
+     ("text/plain", ".lark"),
      ("text/plain", ".properties"),
      ("text/x-gradle", ".gradle"),
      ("text/x-gradle", ".gradle.kts"),
