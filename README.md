@@ -8,7 +8,8 @@ cd praktomat
 docker build -t praktomat .
 cd ..
 
-docker-compose --env-file=aud-win.env up -d
+# Edit template.env so that PRAKTOMAT_CHECKER_EXTERNAL_DIR points to an existing directory
+docker-compose --env-file=template.env up -d
 
 cd traefik
 docker-compose up -d
@@ -52,9 +53,12 @@ Navigate back to the root directory of this repository. The following environmen
 
 Those variables are defined through an environment file. There's a template called `template.env`. Make a copy for each Praktomat instance and modify the contained variables to your needs.
 
-Create a directory called `work-data` in your home directory. Then create a subdirectory with the name of `COMPOSE_PROJECT_NAME` for each instance. The submissions for an instance will be stored here.
+Create a directory called `praktomat/work-data` in your home directory. Then create a subdirectory with the name of `COMPOSE_PROJECT_NAME` for each instance. The submissions for an instance will be stored here.
 
-Then start an instance by supplying your environment file. The command looks like the following.
+Create a directory called `praktomat/postgresql` in your home directory. Then create a subdirectory with the name of `COMPOSE_PROJECT_NAME` for each instance. The database for an instance will be stored here.
+
+Then start an instance by supplying your environment file. Create an ennvironment file, e.g. `aud-win-env`, for your lecture by copying
+and adjusting `template.env`. The command looks like the following.
 
 ```bash
 docker-compose --env-file=aud-win.env up -d
@@ -90,7 +94,7 @@ needs to be installed for the script to work.
 
 Here are some notes on operating praktomat.
 
-- Directory `$HOME/work-data/$COMPOSE_PROJECT_NAME/sent-mails` stores a
+- Directory `$HOME/praktomat/work-data/$COMPOSE_PROJECT_NAME/sent-mails` stores a
   logfile for each error that occurs while praktomat is
   running. (Normally, an email is sent in such a situation.)
 - Firefox requires a full certificate chain in some situations. Make sure to
@@ -101,3 +105,22 @@ Here are some notes on operating praktomat.
   If you don't have the missing certificates, try using a browser that doesn't
   has issues similar to the ones from Firefox and extract them from there.
   Safari did the job for me.
+
+## Developer setup
+
+* Install docker.
+* Create directories `$HOME/praktomat/work-data/generic` and `$HOME/praktomat/postgresql/generic`.
+* Edit `template.env` so that `PRAKTOMAT_CHECKER_EXTERNAL_DIR` points to an existing directory.
+* Uncomment the line `ports: ["8000:443"]` in `docker-compose.yaml`.
+* Execute the following commands:
+
+```
+docker network create praktomat
+cd praktomat
+docker build -t praktomat .
+cd ..
+
+docker-compose --env-file=template.env up -d
+```
+
+* Now your praktomat instance is accessible at `http://localhost:8000/generic`
