@@ -124,3 +124,41 @@ docker-compose --env-file=template.env up -d
 ```
 
 * Now your praktomat instance is accessible at `http://localhost:8000/generic`
+* Create the admin account with
+
+```
+docker exec -it generic /bin/bash
+python3 Praktomat/src/manage-local.py createsuperuser
+```
+
+* You should now be able to perform a successful login.
+
+### Testing a patch with this setup
+
+* Develop your patch in the Praktomat repository.
+* Save your patch with something like:
+
+```
+git diff > my_feature.patch
+```
+
+* Move the patch into `$HOME/praktomat/work-data/generic`.
+* Open a console within the Praktomat container (for example with
+  `docker exec -it generic /bin/bash`).
+* Navigate to the Praktomat directory and apply the patch:
+
+```
+cd Praktomat
+git apply ../work-data/my_feature.patch
+```
+
+* Leave the console and restart the Praktomat container with:
+
+```
+docker compose --env-file=template.env restart praktomat
+```
+
+* Your patch should now be applied. Test to see if everything is working as
+  intended.
+* Don't forget to clean up your container first the next time you want to apply
+  a patch.
