@@ -48,7 +48,7 @@ Navigate back to the root directory of this repository. The following environmen
 - `PRAKTOMAT_NAME`: This is the name of your site. It will be displayed at the top of the web interface.
 - `PRAKTOMAT_ADMIN`: The email address of the administrator for the Praktomat instance
 - `PRAKTOMAT_DOMAIN`: The domain under which your instance(s) will be reachable
-- `PRAKTOMAT_EXTERNAL`: The path to a directory that will be accessible via a bind mount in the Praktomat instance at `/home/praktomat/external`
+- `PRAKTOMAT_EXTERNAL`: The path to a directory that will be accessible via a bind mount in the Praktomat instance at `/external`
 - `PRAKTOMAT_PRODUCTIVE`: The variable will enable the TLS protocol in the `docker-compose.yml`. For local tests on localhost the variable should be set to `false`.
 
 Those variables are defined through an environment file. There's a template called `template.env`. Make a copy for each Praktomat instance and modify the contained variables to your needs.

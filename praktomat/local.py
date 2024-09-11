@@ -73,7 +73,7 @@ DEBUG = MIRROR
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME':   'praktomat',
             'USER':   'praktomat',
             'PASSWORD':   'praktomat_password',
@@ -119,10 +119,9 @@ SYSADMIN_MOTD_URL = None
 USEPRAKTOMATTESTER = False
 
 # It is recomendet to use DOCKER and not a tester account
-# for using Docker from https://github.com/nomeata/safe-docker
+
 # Use docker to test submission
 USESAFEDOCKER = True
-SAFE_DOCKER_PATH = '/usr/local/bin/safe-docker'
 DOCKER_IMAGE_NAME = environ['PRAKTOMAT_CHECKER_IMAGE']
 DOCKER_CONTAINER_WRITABLE = environ['PRAKTOMAT_CHECKER_WRITABLE'] == 'True'
 DOCKER_UID_MOD = environ['PRAKTOMAT_CHECKER_UID_MOD'] == 'True'
@@ -141,15 +140,11 @@ DOCKER_DISCARD_ARTEFACTS = True
 # "_www		ALL=(tester) NOPASSWD: ALL"
 # "developer	ALL=(tester) NOPASSWD: ALL"
 
-# Add the following lines to the end of the file
-# to allow user Praktomat the execution of scriptfile  safe-docker  without requiring a password:
-# "praktomat	ALL= NOPASSWD: /usr/local/bin/safe-docker"
-
 # If you want to switch between "testuser" and "Docker"
 # use "sudo visudo -f /etc/sudoers.d/praktomat-tester"
 # "_www		ALL=(tester) NOPASSWD: ALL"
 # "developer	ALL=(tester) NOPASSWD: ALL"
-# "praktomat 	ALL=(tester) NOPASSWD: ALL, NOPASSWD: /usr/local/bin/safe-docker"
+# "praktomat 	ALL=(tester) NOPASSWD: ALL"
 #
 # be sure that you change file permission
 # sudo chown praktomat:tester praktomat/src/checker/scripts/java

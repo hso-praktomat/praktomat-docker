@@ -6,4 +6,4 @@ Defaults    env_reset
 
 _www		ALL=(tester) NOPASSWD: ALL
 developer	ALL=(tester) NOPASSWD: ALL
-praktomat 	ALL=(tester) NOPASSWD: ALL, NOPASSWD: /usr/local/bin/safe-docker
+praktomat 	ALL=(tester) NOPASSWD: ALL

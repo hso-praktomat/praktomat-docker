@@ -32,8 +32,6 @@ RUN apt-get update && apt-get install -yq \
   locales \
   tzdata \
   cron \
-  libipc-run-perl \
-  libdata-guid-perl \
   ca-certificates \
   curl \
   gnupg \
@@ -66,7 +64,7 @@ USER praktomat
 WORKDIR /home/praktomat
 RUN git clone --recursive https://github.com/hso-praktomat/praktomat.git Praktomat \
   && cd Praktomat \
-  && git checkout 2f45bb8798c6a9f353a2b03913ca65c332850425
+  && git checkout 6a63c2939674112d16104e556d15f6bf1a0af62f
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
@@ -87,9 +85,6 @@ RUN chmod -R g+X .local
 # Install Praktomat addons
 ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12.1-SNAPSHOT-jar-with-dependencies.jar /opt/praktomat-addons/jplag.jar
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
-
-# Install safe-docker
-RUN sudo cp Praktomat/scripts/safe-docker /usr/local/bin/safe-docker
 
 # Copy config file
 COPY local.py Praktomat/src/settings/local.py
