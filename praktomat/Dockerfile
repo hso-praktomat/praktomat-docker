@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:jammy
+FROM ubuntu:noble
 EXPOSE 443/tcp
 
 # Setup timezone
@@ -75,8 +75,7 @@ ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/81b1373f17855a4dc211
 RUN sudo chmod 775 wait-for-it.sh
 
 # Install Python requirements for Praktomat
-RUN python3 -m pip install --upgrade pip && python3 -m pip install -U pip virtualenv setuptools wheel urllib3[secure]
-RUN python3 -m pip install -r Praktomat/requirements.txt
+RUN python3 -m pip install --break-system-packages -r Praktomat/requirements.txt
 
 # Set executable/search flag for directories (only) located inside of /home/praktomat/.local
 # This is required for Apache in order to follow the symlinks to some files (referenced from static directory)
