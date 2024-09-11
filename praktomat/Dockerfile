@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -yq \
   swig \
   libapache2-mod-xsendfile \
   libapache2-mod-wsgi-py3 \
-  openjdk-17-jre-headless \
+  openjdk-21-jre-headless \
   git-core \
   libldap2-dev \
   python3-setuptools \
