@@ -10,7 +10,7 @@ docker network create praktomat
 
 ENV_FILES=""
 start_instance() {
-    docker-compose --env-file=$1 up -d
+    docker compose --env-file=$1 up -d
     ENV_FILES="$ENV_FILES $1"
 }
 
@@ -22,4 +22,4 @@ start_instance prog2-aki.env
 python3 traefik/overview-page/generate.py $ENV_FILES
 
 cd traefik
-docker-compose up -d
+docker compose up -d

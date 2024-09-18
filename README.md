@@ -9,10 +9,10 @@ docker build -t praktomat .
 cd ..
 
 # Edit template.env so that PRAKTOMAT_CHECKER_EXTERNAL_DIR points to an existing directory
-docker-compose --env-file=template.env up -d
+docker compose --env-file=template.env up -d
 
 cd traefik
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Initial setup
@@ -29,7 +29,7 @@ Copy over the SSL/TLS certificate to `traefik/cert.pem` and the private key to `
 Now, start up the Traefik container.
 ```bash
 cd traefik
-docker-compose up -d
+docker compose up -d
 ```
 
 Aside from the labels of other Docker containers, Traefik is configured through a static configuration file `traefik.toml` as well as a dynamic configuration file `traefik_dynamic.toml`. See the [Traefik docs](https://doc.traefik.io/traefik/) for more information.
@@ -61,7 +61,7 @@ Then start an instance by supplying your environment file. Create an ennvironmen
 and adjusting `template.env`. The command looks like the following.
 
 ```bash
-docker-compose --env-file=aud-win.env up -d
+docker compose --env-file=aud-win.env up -d
 ```
 
 Two containers are going to be created and started. One container contains a PostgreSQL database and one container contains the actual Praktomat application.
@@ -120,7 +120,7 @@ cd praktomat
 docker build -t praktomat .
 cd ..
 
-docker-compose --env-file=template.env up -d
+docker compose --env-file=template.env up -d
 ```
 
 * Now your praktomat instance is accessible at `http://localhost:8000/generic`
