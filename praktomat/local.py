@@ -88,6 +88,8 @@ DATABASES = {
 #sudo -u postgres createdb -O <db_user> <db_name>
 #sudo -u postgres createdb -O praktomat praktomat_2017s
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # SECRET_KEY gets generated via defaults.py
 
 # Private key used to sign uploded solution files in submission confirmation email
