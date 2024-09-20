@@ -64,7 +64,7 @@ USER praktomat
 WORKDIR /home/praktomat
 RUN git clone --recursive https://github.com/hso-praktomat/praktomat.git Praktomat \
   && cd Praktomat \
-  && git checkout 6a63c2939674112d16104e556d15f6bf1a0af62f
+  && git checkout ffd2f040e938f797ce596a4021f25ba8db67ef1d
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
