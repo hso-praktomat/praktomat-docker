@@ -2,6 +2,10 @@
 FROM ubuntu:noble
 EXPOSE 443/tcp
 
+# Remove default ubuntu user
+# We'll add our own Praktomat user instead
+RUN touch /var/mail/ubuntu && chown ubuntu /var/mail/ubuntu && userdel -r ubuntu
+
 # Setup timezone
 # Installing tzdata in the next step is required too
 ENV TZ=Europe/Berlin
