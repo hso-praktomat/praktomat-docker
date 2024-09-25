@@ -59,7 +59,13 @@ RUN apt-get update && apt-get install -yq \
   && rm -rf /var/lib/apt/lists/*
 
 # Add users
-RUN useradd -m praktomat && adduser praktomat sudo
+# The praktomat user has UID 1000 explicitly.
+# This allows an easier access to the files in work-data when the host user has
+# UID 1000 as well. Otherwise, files written inside the container will have the
+# praktomat user's UID. If that is not 1000, this UID leaks to the host system
+# and tin he default case (single user with UID 1000), the host user can't fully
+# access the files without using tools like sudo.
+RUN useradd -m praktomat -u 1000 && adduser praktomat sudo
 RUN useradd -m tester && adduser tester sudo && adduser tester praktomat
 COPY sudoers /etc/sudoers
 RUN chmod 440 /etc/sudoers
