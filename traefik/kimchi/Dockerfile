@@ -1,4 +1,4 @@
-FROM golang:1.24-alpine as builder
+FROM golang:1.24-alpine AS builder
 
 RUN apk add --update --no-cache --force-overwrite git make 
 WORKDIR /
