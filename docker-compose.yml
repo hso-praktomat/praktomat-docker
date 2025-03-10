@@ -29,6 +29,7 @@ services:
       - PRAKTOMAT_CHECKER_WRITABLE
       - PRAKTOMAT_CHECKER_ENABLE_NETWORK
       - PRAKTOMAT_DOMAIN
+    init: true
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db
     image: postgres:17.4-alpine
