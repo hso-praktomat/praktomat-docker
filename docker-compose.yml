@@ -29,9 +29,10 @@ services:
       - PRAKTOMAT_CHECKER_WRITABLE
       - PRAKTOMAT_CHECKER_ENABLE_NETWORK
       - PRAKTOMAT_DOMAIN
+    init: true
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db
-    image: postgres:16.4-alpine
+    image: postgres:17.4-alpine
     volumes:
     - $PWD/postgresql/init.sh:/docker-entrypoint-initdb.d/init.sh
     - $HOME/praktomat/postgresql/$COMPOSE_PROJECT_NAME:/var/lib/postgresql/data

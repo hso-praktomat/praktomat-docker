@@ -1,10 +1,10 @@
-FROM golang:1.22-alpine as builder
+FROM golang:1.24-alpine AS builder
 
 RUN apk add --update --no-cache --force-overwrite git make 
 WORKDIR /
-RUN git clone https://git.sr.ht/~emersion/kimchi \
+RUN git clone https://codeberg.org/emersion/kimchi \
     && cd kimchi \
-    && git checkout 4b663f91b4bc7bb1a7d8257a436ef4c552f7875b
+    && git checkout 63ffe933897eadaceb4b502a4ee7570b8f84f40e
 
 WORKDIR /kimchi
 RUN make kimchi
