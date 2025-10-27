@@ -9,7 +9,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - $PWD/traefik.toml:/traefik.toml
       - $PWD/traefik_dynamic.toml:/traefik_dynamic.toml
-      - $PWD/cert.pem:/cert.pem
+      - $PWD/fullchain.pem:/cert.pem
       - $PWD/key.pem:/key.pem
   overview-page:
     image: kimchi

@@ -14,9 +14,12 @@ start_instance() {
     ENV_FILES="$ENV_FILES $1"
 }
 
-start_instance aud-ai.env
-start_instance aud-win.env
-start_instance prog2-aki.env
+start_instance oosd.env
+start_instance adv-cpp.env
+start_instance prog1-aki.env
+start_instance java-aki.env
+start_instance advanced-prog.env
+start_instance prog-nes.env
 
 # Regenerate overview page
 python3 traefik/overview-page/generate.py $ENV_FILES
