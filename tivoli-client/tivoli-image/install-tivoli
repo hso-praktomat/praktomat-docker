@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -e
+
 cd /tmp
-wget --no-verbose ftp://public.dhe.ibm.com/storage/tivoli-storage-management/patches/client/v7r1/Linux/LinuxX86_DEB/v716/7.1.6.5-TIV-TSMBAC-LinuxX86_DEB.tar
+wget https://aix.software.ibm.com/storage/tivoli-storage-management/patches/client/v7r1/Linux/LinuxX86_DEB/v716/7.1.6.5-TIV-TSMBAC-LinuxX86_DEB.tar
 tar xfv 7.1.6.5-TIV-TSMBAC-LinuxX86_DEB.tar
 cd bacli
 dpkg -i gskcrypt64_8.0-50.66.linux.x86_64.deb gskssl64_8.0-50.66.linux.x86_64.deb
