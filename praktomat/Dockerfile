@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:noble
+FROM ubuntu:questing
 EXPOSE 443/tcp
 
 # Remove default ubuntu user

@@ -157,7 +157,7 @@ DOCKER_DISCARD_ARTEFACTS = True
 
 # Does Apache use "mod_xsendfile" version 1.0?
 # If you use "libapache2-mod-xsendfile", this flag needs to be set to False
-MOD_XSENDFILE_V1_0 = False
+MOD_XSENDFILE_V1_0 = True
 
 # Our VM has 4 cores, so lets try to use them
 # But Gradle has a common build directory for a project
