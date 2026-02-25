@@ -9,8 +9,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - $PWD/traefik.toml:/traefik.toml
       - $PWD/traefik_dynamic.toml:/traefik_dynamic.toml
-      - $PWD/fullchain.pem:/cert.pem
-      - $PWD/key.pem:/key.pem
+      - $PWD/certbot:/certbot
   overview-page:
     image: kimchi
     build:
@@ -25,6 +24,13 @@ services:
       - traefik.http.routers.overview-page.rule=PathPrefix(`/`)
       - traefik.http.routers.overview-page.entrypoints=websecure
       - traefik.http.routers.overview-page.tls=true
+  certbot:
+    image: certbot/certbot:latest
+    command: "true"
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/certbot
 networks:
   praktomat:
     external: true

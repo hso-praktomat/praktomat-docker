@@ -1,3 +1,3 @@
 [[tls.certificates]]
-certFile = "cert.pem"
-keyFile = "key.pem"
+certFile = "/certbot/conf/live/all-certs/fullchain.pem"
+keyFile = "/certbot/conf/live/all-certs/privkey.pem"
