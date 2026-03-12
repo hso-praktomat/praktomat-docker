@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -yq \
   swig \
   libapache2-mod-xsendfile \
   libapache2-mod-wsgi-py3 \
-  openjdk-21-jre-headless \
+  openjdk-25-jre-headless \
   git-core \
   libldap2-dev \
   python3-setuptools \
@@ -74,7 +74,7 @@ USER praktomat
 WORKDIR /home/praktomat
 RUN git clone --recursive https://github.com/hso-praktomat/praktomat.git Praktomat \
   && cd Praktomat \
-  && git checkout a402f91bf6d4a7c40501da712389d4f20398e39e
+  && git checkout a51ae0736c4ec320b8d005f81ef16db14fd48c74
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
