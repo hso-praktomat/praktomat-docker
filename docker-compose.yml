@@ -9,6 +9,9 @@ services:
       - type: bind
         source: $HOME/praktomat/work-data/$COMPOSE_PROJECT_NAME
         target: /home/praktomat/work-data
+      # Uncomment the following block to use your local Praktomat repository instead of the one included in the image (useful during development)
+      # You then do not need to rebuild the image on each change or edit the container while it's running.
+      # Make sure to adjust the source path so it points to the Praktomat repository on your computer.
       # - type: bind
       #   source: $HOME/devel/Praktomat
       #   target: /home/praktomat/Praktomat
