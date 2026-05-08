@@ -98,7 +98,8 @@ ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
 
 # Copy config file
-COPY local.py Praktomat/src/settings/local.py
+COPY local.py praktomat_docker_settings/docker_settings.py
+ENV DJANGO_SETTINGS_MODULE=docker_settings
 
 # Setup required directories
 RUN mkdir debug-data work-data test-data
@@ -108,9 +109,9 @@ ENV APACHE_RUN_USER=www-data
 ENV APACHE_RUN_GROUP=www-data
 RUN sudo adduser www-data praktomat
 RUN sudo a2enmod macro
-COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
-COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
-RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
+COPY praktomat.wsgi praktomat.wsgi
+COPY apache_praktomat_wsgi.conf apache_praktomat_wsgi.conf
+RUN printf "\nInclude /home/praktomat/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
 COPY mpm_event.conf /etc/apache2/mods-available/mpm_event.conf
 
 # Configure OpenLDAP
@@ -118,7 +119,7 @@ COPY CA17.pem /etc/ssl/certs/CA17.pem
 RUN printf "\nTLS_CACERT    /etc/ssl/certs/CA17.pem\n" | sudo tee -a /etc/ldap/ldap.conf
 
 # Initialize Praktomat
-RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_CHECKER_IMAGE="" PRAKTOMAT_CHECKER_UID_MOD="" PRAKTOMAT_CHECKER_WRITABLE="" PRAKTOMAT_DOMAIN="" python3 Praktomat/src/manage-local.py collectstatic --noinput --link
+RUN COMPOSE_PROJECT_NAME="" PRAKTOMAT_NAME="" PRAKTOMAT_ADMIN="" PRAKTOMAT_CHECKER_IMAGE="" PRAKTOMAT_CHECKER_UID_MOD="" PRAKTOMAT_CHECKER_WRITABLE="" PRAKTOMAT_DOMAIN="" PYTHONPATH=$HOME/praktomat_docker_settings python3 Praktomat/src/manage-local.py collectstatic --noinput --link
 
 # Configure Cron to automatically run all checkers
 COPY daily-cron.sh daily-cron.sh

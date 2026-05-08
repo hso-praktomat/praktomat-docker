@@ -9,6 +9,9 @@ services:
       - type: bind
         source: $HOME/praktomat/work-data/$COMPOSE_PROJECT_NAME
         target: /home/praktomat/work-data
+      # - type: bind
+      #   source: $HOME/devel/Praktomat
+      #   target: /home/praktomat/Praktomat
     depends_on:
       - postgresql
     networks:

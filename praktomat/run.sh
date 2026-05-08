@@ -10,5 +10,5 @@ env | egrep "^(PRAKTOMAT|COMPOSE_PROJECT_NAME|PATH)" > praktomat.env
 sudo cron
 
 # Apply migrations and run Praktomat
-python3 Praktomat/src/manage-local.py migrate --noinput && \
+PYTHONPATH=$HOME/praktomat_docker_settings python3 Praktomat/src/manage-local.py migrate --noinput && \
 sudo -E apache2ctl -DFOREGROUND
