@@ -34,7 +34,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.%s' % (settings_module
 
 import sys
 
-sys.path.append(join(dirname(dirname(__file__)), "src"))
+sys.path.append("/home/praktomat/Praktomat/src")
+sys.path.append("/home/praktomat/praktomat_docker_settings")
 
 import warnings
 from django.core.cache import CacheKeyWarning

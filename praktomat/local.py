@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 from os import environ
 from os.path import join, dirname
 
-PRAKTOMAT_PATH = dirname(dirname(dirname(__file__)))
+PRAKTOMAT_PATH = join(dirname(dirname(__file__)), 'Praktomat')
 
 PRAKTOMAT_ID = environ['COMPOSE_PROJECT_NAME']
 
@@ -192,5 +192,5 @@ MIMETYPE_ADDITIONAL_EXTENSIONS = \
 TEST_MAXFILESIZE=1000000000
 
 # Finally load defaults for missing settings.
-from . import defaults
+from settings import defaults
 defaults.load_defaults(globals())
