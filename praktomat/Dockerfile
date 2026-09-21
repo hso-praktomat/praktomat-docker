@@ -44,7 +44,6 @@ RUN apt-get update && apt-get install -yq \
 
 RUN update-alternatives --set sudo /usr/bin/sudo.ws
 
-
 # Setup locale
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
