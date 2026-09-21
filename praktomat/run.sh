@@ -4,7 +4,7 @@
 ./wait-for-it.sh postgresql:5432
 
 # Dump environment variables (required for running checkers with cron)
-env | egrep "^(PRAKTOMAT|COMPOSE_PROJECT_NAME|PATH)" > praktomat.env
+env | egrep "^(PRAKTOMAT|COMPOSE_PROJECT_NAME|PATH|DJANGO|PYTHONPATH)" > praktomat.env
 
 # Start cron
 sudo cron

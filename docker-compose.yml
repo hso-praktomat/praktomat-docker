@@ -9,6 +9,12 @@ services:
       - type: bind
         source: $HOME/praktomat/work-data/$COMPOSE_PROJECT_NAME
         target: /home/praktomat/work-data
+      # Uncomment the following block to use your local Praktomat repository instead of the one included in the image (useful during development)
+      # You then do not need to rebuild the image on each change or edit the container while it's running.
+      # Make sure to adjust the source path so it points to the Praktomat repository on your computer.
+      # - type: bind
+      #   source: $HOME/devel/Praktomat
+      #   target: /home/praktomat/Praktomat
     depends_on:
       - postgresql
     networks:
@@ -24,11 +30,17 @@ services:
       - PRAKTOMAT_NAME
       - PRAKTOMAT_ADMIN
       - PRAKTOMAT_CHECKER_EXTERNAL_DIR
+      - PRAKTOMAT_CHECKER_EXTERNAL_EXTRA_DIR_1
+      - PRAKTOMAT_CHECKER_EXTERNAL_EXTRA_DIR_2
+      - PRAKTOMAT_CHECKER_EXTERNAL_EXTRA_DIR_3
+      - PRAKTOMAT_CHECKER_EXTERNAL_EXTRA_DIR_4
+      - PRAKTOMAT_CHECKER_EXTERNAL_EXTRA_DIR_5
       - PRAKTOMAT_CHECKER_IMAGE
       - PRAKTOMAT_CHECKER_UID_MOD
       - PRAKTOMAT_CHECKER_WRITABLE
       - PRAKTOMAT_CHECKER_ENABLE_NETWORK
       - PRAKTOMAT_DOMAIN
+      - PRAKTOMAT_TEST_TIMEOUT
     init: true
   postgresql:
     container_name: ${COMPOSE_PROJECT_NAME}_db

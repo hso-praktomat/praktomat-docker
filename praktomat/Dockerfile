@@ -42,7 +42,8 @@ RUN apt-get update && apt-get install -yq \
   lsb-release \
   && rm -rf /var/lib/apt/lists/*
 
-  RUN update-alternatives --set sudo /usr/bin/sudo.ws
+RUN update-alternatives --set sudo /usr/bin/sudo.ws
+
 
 # Setup locale
 RUN locale-gen en_US.UTF-8
@@ -76,7 +77,7 @@ USER praktomat
 WORKDIR /home/praktomat
 RUN git clone --recursive https://github.com/hso-praktomat/praktomat.git Praktomat \
   && cd Praktomat \
-  && git checkout a51ae0736c4ec320b8d005f81ef16db14fd48c74
+  && git checkout 3d9d91a9f9fa4fbc2e40e826c45bc462022463a4
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
@@ -98,7 +99,9 @@ ADD https://github.com/jplag/jplag/releases/download/v2.12.1-SNAPSHOT/jplag-2.12
 RUN sudo chown -R praktomat:praktomat /opt/praktomat-addons
 
 # Copy config file
-COPY local.py Praktomat/src/settings/local.py
+COPY local.py praktomat_docker_settings/docker_settings.py
+ENV DJANGO_SETTINGS_MODULE=docker_settings
+ENV PYTHONPATH=/home/praktomat/praktomat_docker_settings
 
 # Setup required directories
 RUN mkdir debug-data work-data test-data
@@ -108,9 +111,9 @@ ENV APACHE_RUN_USER=www-data
 ENV APACHE_RUN_GROUP=www-data
 RUN sudo adduser www-data praktomat
 RUN sudo a2enmod macro
-COPY praktomat.wsgi Praktomat/wsgi/praktomat.wsgi
-COPY apache_praktomat_wsgi.conf Praktomat/documentation/apache_praktomat_wsgi.conf
-RUN printf "\nInclude /home/praktomat/Praktomat/documentation/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
+COPY praktomat.wsgi praktomat.wsgi
+COPY apache_praktomat_wsgi.conf apache_praktomat_wsgi.conf
+RUN printf "\nInclude /home/praktomat/apache_praktomat_wsgi.conf\n" | sudo tee -a /etc/apache2/apache2.conf
 COPY mpm_event.conf /etc/apache2/mods-available/mpm_event.conf
 
 # Configure OpenLDAP
