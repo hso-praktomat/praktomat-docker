@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
-import os
 from shell import *
 import sys
 
-instances_html = []
+instances_html: list[str] = []
 
 # Read instance template
 with open(pjoin(dirname(__file__), "instance.html.in")) as f:

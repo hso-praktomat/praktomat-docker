@@ -1,0 +1,14 @@
+[tool.pyright]
+# The standalone Python tooling owned by this repo: the backup/syscheck scripts
+# under tools/ and the Traefik overview page generator.
+include = ["tools", "traefik/overview-page/generate.py"]
+# praktomat/local.py is a Django settings fragment that gets copied into the
+# (externally cloned) Praktomat application image; it relies on names defined
+# by that application's settings/defaults.py, which isn't present in this repo,
+# so it isn't a standalone module that can be type checked here.
+exclude = ["**/__pycache__"]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+reportWildcardImportFromLibrary = "none"
