@@ -6,11 +6,11 @@ thisDir = dirname(__file__)
 topDir = abspath(pjoin(thisDir, ".."))
 pgBackupDir = f'{HOME}/pgbackup'
 
-def doBackup():
+def doBackup() -> None:
     info('Performing backup with tivoli')
     run(f'{topDir}/tivoli-client/run-tivoli-client dsmc incr /data')
 
-def freeFilename(name, ext):
+def freeFilename(name: str, ext: str) -> str:
     cand = name + ext
     if not exists(cand):
         return cand
@@ -20,7 +20,7 @@ def freeFilename(name, ext):
             return cand
     raise ValueError(f"No free file name found: {cand}")
 
-def dumpPostgres(container, dbName):
+def dumpPostgres(container: str, dbName: str) -> None:
     info(f'Dumping postgres DB {dbName} in container {container}')
     mkdir(pgBackupDir, createParents=True)
     today = date.today().isoformat()
@@ -31,12 +31,12 @@ def dumpPostgres(container, dbName):
     info(cmd)
     run(cmd)
 
-def cleanup():
+def cleanup() -> None:
     info('Cleaning up postgres backups older than 7 days ...')
     run(f'find {pgBackupDir} -type f -mtime +7 -print -delete')
     info('Finished postgres cleanup')
 
-def backup(containerWithDbs):
+def backup(containerWithDbs: list[tuple[str, str]]) -> None:
     print()
     info('New backup run ...')
     cleanup()
