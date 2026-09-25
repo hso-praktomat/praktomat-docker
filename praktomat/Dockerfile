@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:questing
+FROM ubuntu:resolute
 EXPOSE 443/tcp
 
 # Remove default ubuntu user
@@ -76,7 +76,7 @@ USER praktomat
 WORKDIR /home/praktomat
 RUN git clone --recursive https://github.com/hso-praktomat/praktomat.git Praktomat \
   && cd Praktomat \
-  && git checkout 3d9d91a9f9fa4fbc2e40e826c45bc462022463a4
+  && git checkout 7a657885164f035d3ca614386cf54a1fca024758
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/java
 RUN sudo chown praktomat:tester Praktomat/src/checker/scripts/javac
 RUN sudo chmod u+x,g+x,o-x Praktomat/src/checker/scripts/java
