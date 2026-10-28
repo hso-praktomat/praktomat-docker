@@ -1,3 +1,5 @@
 *.env
 !template.env
 __pycache__
+.venv
+

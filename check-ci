@@ -1,0 +1,6 @@
+#!/bin/bash
+# Type checks the project's Python code by running pyright inside the .venv.
+
+set -e
+cd "$(dirname "$0")"
+.venv/bin/pyright
